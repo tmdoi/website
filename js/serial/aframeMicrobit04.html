@@ -8,7 +8,7 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script>
       AFRAME.registerComponent('handle-events', {
-        init: function () {
+        init: async function () {
           console.log('Welcome, microbit!');
           var el = this.el;  // <a-box>
           el.addEventListener('mouseenter', function () {
