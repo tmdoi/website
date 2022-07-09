@@ -19,6 +19,41 @@
           el.addEventListener('click', function () {
             // el.setAttribute('scale', {x: 2, y: 1, z: 2});
             console.log('You clicked!' );
+            try {
+              const port = await navigator.serial.requestPort();
+              await port.open({ baudRate: 115200 });
+
+              while (port.readable) {
+              // ▼追加した部分2
+                const textDecoder = new TextDecoderStream();
+                const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+                const reader = textDecoder.readable
+                .pipeThrough(new TransformStream(new LineBreakTransformer()))
+                .getReader();
+
+                try {
+                   while (true) {
+                   const { value, done } = await reader.read();
+                   if (done) {
+                      console.log("Canceled");
+                      break;
+                   }
+                   // ▼ここでデコードの処理をしていたのを削除
+                   console.log(value);
+                  }
+                } catch (error) {
+                   console.log("Error: Read");
+                   console.log(error);
+                } finally {
+                   reader.releaseLock();
+                }
+              }
+            } catch (error) {
+               console.log("Error: Open");
+               console.log(error);
+            }
+          }
+                              
           });
         } 
       });
