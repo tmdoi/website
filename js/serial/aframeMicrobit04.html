@@ -8,7 +8,7 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script>
       AFRAME.registerComponent('handle-events', {
-        init: async function () {
+        init: function () {
           console.log('Welcome, microbit!');
           var el = this.el;  // <a-box>
           el.addEventListener('mouseenter', function () {
@@ -17,7 +17,7 @@
           el.addEventListener('mouseleave', function () {
             el.setAttribute('color', '#EF2D5E');  
           });
-          el.addEventListener('click', function () {
+          el.addEventListener('click', async function () {
             // el.setAttribute('scale', {x: 2, y: 1, z: 2});
             console.log('You clicked!' );
             try {
