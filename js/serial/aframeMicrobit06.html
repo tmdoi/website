@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>+Cursor Handler - A-Frame School</title>
+    <meta name="description" content="Cursor Handler - A-Frame School">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('handle-events', {
+        init: function () {
+          console.log('Welcome, microbit!');
+          var el = this.el;  // <a-box>
+          el.addEventListener('mouseenter', function () {
+            el.setAttribute('color', '#24CAFF');  
+          });
+          el.addEventListener('mouseleave', function () {
+            el.setAttribute('color', '#EF2D5E');  
+          });
+          el.addEventListener('click', async function () {
+            // el.setAttribute('scale', {x: 2, y: 1, z: 2});
+            console.log('You clicked!' );
+            try {
+              const port = await navigator.serial.requestPort();
+              await port.open({ baudRate: 115200 });
+
+              while (port.readable) {
+              // ▼追加した部分2
+                const textDecoder = new TextDecoderStream();
+                const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+                const reader = textDecoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer())).getReader();
+
+                try {
+                   while (true) {
+                   const { value, done } = await reader.read();
+                   if (done) {
+                      console.log("Canceled");
+                      break;
+                   }
+                   // ▼ここでデコードの処理をしていたのを削除
+                   console.log(value);
+                  }
+                } catch (error) {
+                   console.log("Error: Read");
+                   console.log(error);
+                } finally {
+                   reader.releaseLock();
+                }
+              }
+            } catch (error) {
+               console.log("Error: Open");
+               console.log(error);
+            }
+                              
+          });
+        } 
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-box color="#EF2D5E" position="0 1 -4" handle-events></a-box>
+      
+      <a-camera><a-cursor></a-cursor></a-camera>
+      <a-sky color="#333"></a-sky>
+      <a-plane color="#000" rotation="-90 0 0" width="500" height="500"></a-plane>
+    </a-scene>
+  </body>
+</html>
