@@ -27,10 +27,14 @@
               console.log('Try 1st step -02.' );
               
               while (port.readable) {
+              console.log('while 2nd step -00.' );
               // ▼追加した部分2
                 const textDecoder = new TextDecoderStream();
+                console.log('while 2nd step -01.' );
                 const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+                console.log('while 2nd step -02.' );
                 const reader = textDecoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer())).getReader();
+                console.log('while 2nd step -03.' );
 
                 try {
                    while (true) {
