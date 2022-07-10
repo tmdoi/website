@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>++Cursor Handler - A-Frame School</title>
+    <title>+Cursor Handler - A-Frame School</title>
     <meta name="description" content="Cursor Handler - A-Frame School">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
@@ -28,9 +28,9 @@
               // ▼追加した部分2
                 const textDecoder = new TextDecoderStream();
                 const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
-                const reader = textDecoder.readable
-                .pipeThrough(new TransformStream(new LineBreakTransformer()))
-                .getReader();
+                const reader = textDecoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer())).getReader();
+                
+                console.log('Set reader.');
 
                 try {
                    while (true) {
