@@ -2,11 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>++Cursor Handler - A-Frame School</title>
+    <title>+++Cursor Handler - A-Frame School</title>
     <meta name="description" content="Cursor Handler - A-Frame School">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script>
+      // ▼追加した部分1
+      class LineBreakTransformer {
+          constructor() {
+            this.chunks = "";
+          }
+
+          transform(chunk, controller) {
+            this.chunks += chunk;
+            const lines = this.chunks.split("\r\n");
+            this.chunks = lines.pop();
+            lines.forEach((line) => controller.enqueue(line));
+          }
+
+          flush(controller) {
+            controller.enqueue(this.chunks);
+          }
+      }
       AFRAME.registerComponent('handle-events', {
         init: function () {
           console.log('Welcome, microbit!');
