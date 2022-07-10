@@ -29,8 +29,6 @@
                 const textDecoder = new TextDecoderStream();
                 const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
                 const reader = textDecoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer())).getReader();
-                
-                console.log('Set reader.');
 
                 try {
                    while (true) {
