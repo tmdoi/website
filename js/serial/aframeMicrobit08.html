@@ -34,6 +34,14 @@
           var nX = 0;
           var nY = 0;
           var nZ = 0;
+          var data = {};
+ 
+          data["X"] = nX;
+          data["Y"] = nY;
+          data["Z"] = nZ;
+ 
+          json_data = JSON.stringify(data);
+          console.log(json_data);
           
           el.addEventListener('mouseenter', function () {
             el.setAttribute('color', '#24CAFF');  
@@ -83,6 +91,7 @@
                      nZ = num;
                    }  
                    console.log(value, sV, num, nX, nY, nZ);
+                   el.setAttribute('scale', {x: 2, y: 1, z: 2});
                    //  
                   }
                 } catch (error) {
