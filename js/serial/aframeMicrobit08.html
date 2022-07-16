@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>*JSON_Cursor Handler - A-Frame School</title>
+    <title>JSON_Cursor Handler - A-Frame School</title>
     <meta name="description" content="Cursor Handler - A-Frame School">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
@@ -36,9 +36,9 @@
           var nZ = 0;
           var data = {};
  
-          data[0] = 'X:'+nX;
-          data[1] = 'Y:'+nY;
-          data[2] = 'Z:'+nZ;
+          data["X"] = nX;
+          data["Y"] = nY;
+          data["Z"] = nZ;
  
           json_data = JSON.stringify(data);
           console.log(json_data);
