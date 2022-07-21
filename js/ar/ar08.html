@@ -27,6 +27,20 @@
         },
         tick: function (time, timeDelta) {
           //一定周期で更新
+          if(this.isTracking){
+            //このスクリプトが適用されているオブジェクト(=マーカー)を取得
+            var marker=this.el.object3D;
+            //マーカーの位置を取得
+            var p = new THREE.Vector3();
+            marker.getWorldPosition(p);
+            //マーカーの姿勢(向き)を取得
+            var q = new THREE.Quaternion();
+            marker.getWorldQuaternion(q);
+            //AR表示に用いるオブジェクトの位置・姿勢に反映
+            var obj =this.data.arobject.object3D;
+            obj.position.set(p.x, p.y, p.z);
+            obj.quaternion.set ( q.x, q.y, q.z, q.w);        
+          } 
         }
       });
     </script>
@@ -36,7 +50,7 @@
       <!--
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       -->
-      <a-marker markerhandler preset="hiro"></a-marker>
+      <a-marker markerhandler="arobject:#ar-objects" preset="hiro"></a-marker>
       <a-entity id="ar-objects">
         <a-sphere position="0 1.25 0" radius="1.25" src="https://cdn.glitch.com/65aeb152-eaae-4cfb-8caf-6eeb287f6437%2Fearth.jpg?v=1615424610111" shadow
                   animation = "
