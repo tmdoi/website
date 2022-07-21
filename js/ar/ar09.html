@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Hello AR-World! A-Frame v1.2.0</title>
+    <title>Org_ello AR-World! A-Frame v1.2.0</title>
     <mate name="desctription" content="Hello AR-World! A-Frame v1.2.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
@@ -24,7 +24,7 @@
             this.isTracking=false;
             console.log("tracking:"+ this. isTracking);
             var obj =this.data.arobject.object3D; //ARオブジェクトを取得
-            obj.position.set(0,0,-6); //z=-6 (画面置く方向に配置)
+            obj.position.set(0,4,-10); //z=-6 (画面置く方向に配置)
             obj.quaternion.set ( 0,0,0,1); //姿勢を初期状態に戻す
             obj.rotateX ( 3.14/2 ) ; //90度回転させて調整
             
