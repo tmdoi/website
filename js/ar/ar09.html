@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>Hello AR-World! A-Frame v1.2.0</title>
+    <mate name="desctription" content="Hello AR-World! A-Frame v1.2.0">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script>
+      AFRAME.registerComponent('markerhandler', {
+        schema: {
+          //引数
+          arobject: {type: 'selector'}
+        },
+        init: function () {
+          //初期化
+          //マーカー検出/ロストの状態を管理する変数を定義しfalseで初期化
+          this.isTracking=false;
+          //markerFoundはマーカー検出時に呼ばれる
+          this.el.sceneEl.addEventListener('markerFound', () => {
+            this.isTracking=true;
+            console.log("tracking:"+ this. isTracking);       
+          });
+          //markerLostはロスト検出時に呼ばれる
+          this.el.sceneEl.addEventListener('markerLost', () => {
+            this.isTracking=false;
+            console.log("tracking:"+ this. isTracking);
+            var obj =this.data.arobject.object3D; //ARオブジェクトを取得
+            obj.position.set(0,0,-6); //z=-6 (画面置く方向に配置)
+            obj.quaternion.set ( 0,0,0,1); //姿勢を初期状態に戻す
+            obj.rotateX ( 3.14/2 ) ; //90度回転させて調整
+            
+          });        
+        },
+        tick: function (time, timeDelta) {
+          //一定周期で更新
+          if(this.isTracking){
+            //このスクリプトが適用されているオブジェクト(=マーカー)を取得
+            var marker=this.el.object3D;
+            //マーカーの位置を取得
+            var p = new THREE.Vector3();
+            marker.getWorldPosition(p);
+            //マーカーの姿勢(向き)を取得
+            var q = new THREE.Quaternion();
+            marker.getWorldQuaternion(q);
+            //AR表示に用いるオブジェクトの位置・姿勢に反映
+            var obj =this.data.arobject.object3D;
+            obj.position.set(p.x, p.y, p.z);
+            obj.quaternion.set ( q.x, q.y, q.z, q.w);        
+          } 
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene embedded arjs>
+      <!--
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      -->
+      <a-marker markerhandler="arobject:#ar-objects" preset="hiro"></a-marker>
+      <a-entity id="ar-objects">
+        <a-sphere position="0 1.25 0" radius="1.25" src="https://cdn.glitch.com/65aeb152-eaae-4cfb-8caf-6eeb287f6437%2Fearth.jpg?v=1615424610111" shadow
+                  animation = "
+                             property : rotation;
+                             dur : 10000;
+                             from : 0 0 0;
+                             to : 0 360 0;
+                             loop : -1;
+                             easing : linear;
+                             "    
+                  >
+        </a-sphere>      
+      </a-entity>
+      <!--
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky  src="https://tmdoi.github.io/website/js/ar/space.jpg"></a-sky>
+      -->
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
