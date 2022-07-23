@@ -34,6 +34,8 @@
           var nX = 0;
           var nY = 0;
           var nZ = 0;
+          var r = 0.0;
+          var p = 0.0;
           
           //var data = {};
 
@@ -63,7 +65,7 @@
               //console.log('Try 1st step -02.' );
 
               while (port.readable) {
-              console.log('while 2nd step -00.' );
+              //console.log('while 2nd step -00.' );
               // ▼追加した部分2
                 const textDecoder = new TextDecoderStream();
                 // console.log('while 1st step -01.' );
@@ -95,7 +97,10 @@
                      nZ = num;
                    }
                    // string = "{ X:" + nX / 1000 + ", Y:" + nY / 1000 + ", Z:" + nZ / 1000 + "}";
-                   console.log(value, sV, num, nX, nY, nZ );
+                   
+                   r = Math.atan( nY / nZ );
+                       
+                   console.log(value, sV, num, nX, nY, nZ, r );
                        
 
                    //el.setAttribute('scale', JSON.stringify(string));
