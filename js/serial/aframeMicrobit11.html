@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>atan_micro:bit_Cursor Handler - A-Frame School</title>
+    <title>micro:bit_Cursor Handler - A-Frame School</title>
     <meta name="description" content="Cursor Handler - A-Frame School">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
@@ -101,11 +101,14 @@
                    r = Math.atan( nY / nZ );
                        
                    console.log(value, sV, num, nX, nY, nZ, r );
-                       
-
+                    
+                   // With three.js
+                       el.object3D.rotation.set( r, 0, 0);
+                       el.object3D.rotation.x += Math.PI;
+                   
                    //el.setAttribute('scale', JSON.stringify(string));
                    // With three.js
-                   el.object3D.scale.set(nX/500, nY/500, nZ/500);
+                   //el.object3D.scale.set(nX/500, nY/500, nZ/500);
 
                    //
                   }
