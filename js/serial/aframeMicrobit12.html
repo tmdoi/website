@@ -99,11 +99,12 @@
                    // string = "{ X:" + nX / 1000 + ", Y:" + nY / 1000 + ", Z:" + nZ / 1000 + "}";
                    
                    r = Math.atan( nY / nZ );
+                   p = Math.atan( -nX / Math.sqrt(nY*nY+nZ*nZ));
                        
-                   console.log(value, sV, num, nX, nY, nZ, r );
+                   console.log(value, sV, num, nX, nY, nZ, r, p );
                     
                    // With three.js
-                       el.object3D.rotation.set( -r, 0, 0);
+                       el.object3D.rotation.set( -r, 0, p );
                        el.object3D.rotation.x += Math.PI/2;
                    
                    //el.setAttribute('scale', JSON.stringify(string));
