@@ -1,10 +1,51 @@
 <html>
   <head>
-    <title>Org_ello AR-World! A-Frame v1.2.0</title>
+    <title>Omake:AR-World! A-Frame v1.2.0</title>
     <mate name="desctription" content="Hello AR-World! A-Frame v1.2.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script>
+      window.onload = function() { 
+        //マウス操作に対応
+        window.addEventListener('mousedown', touchDownHandler);
+        window.addEventListener('mousemove', touchMoveHandler);
+        window.addEventListener('mouseup', touchEndHandler);
+        //スマホ画面操作に対応
+        window.addEventListener('touchstart', touchDownHandler);
+        window.addEventListener('touchmove', touchMoveHandler);
+        window.addEventListener('touchend', touchEndHandler); 
+      };
+      
+      var startX; //画面タッチorクリック開始位置
+      var pressed=false; //現在画面を触っているか否か
+
+      var touchDownHandler= function(e) {
+        pressed=true; //画面操作開始
+        if (e.touches && e.touches[0]) {//スマホ画面をタッチしたなら
+          startX = e.touches[0].clientX;
+        } 
+        else if (e.clientX) {//PC画面をクリックしたなら
+          startX = e.clientX;
+        }  
+      };
+      
+      var touchEndHandler= function(e) {
+        pressed=false; //画面操作終了        
+      };
+      var touchMoveHandler = function(e) {       
+        if(pressed){ //画面操作中なら
+           var x = 0;
+           if (e.touches && e.touches[0]) {
+                  x = e.touches[0].clientX;
+           } 
+           else if (e.clientX) {
+                  x = e.clientX;
+          }
+          var obj =document.getElementById("earth").object3D;
+          obj.rotateZ((x-startX)*0.001); //Z軸回転
+        }      
+      };
+
       AFRAME.registerComponent('markerhandler', {
         schema: {
           //引数
@@ -57,7 +98,9 @@
       -->
       <a-marker markerhandler="arobject:#ar-objects" preset="hiro"></a-marker>
       <a-entity id="ar-objects">
-        <a-sphere position="0 1.25 0" radius="1.25" src="https://cdn.glitch.com/65aeb152-eaae-4cfb-8caf-6eeb287f6437%2Fearth.jpg?v=1615424610111" shadow
+        <a-entity id="earth">
+          <!--ここにa-sphere(地球)に関する記述-->
+          <a-sphere position="0 1.25 0" radius="1.25" src="https://cdn.glitch.com/65aeb152-eaae-4cfb-8caf-6eeb287f6437%2Fearth.jpg?v=1615424610111" shadow
                   animation = "
                              property : rotation;
                              dur : 10000;
@@ -67,7 +110,8 @@
                              easing : linear;
                              "    
                   >
-        </a-sphere>      
+          </a-sphere>
+        </a-entity>
       </a-entity>
       <!--
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
