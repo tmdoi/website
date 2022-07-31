@@ -6,7 +6,7 @@
     <meta name="description" content="Cursor Handler - A-Frame School">
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
-    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
     <script>// ▼追加した部分1
       class LineBreakTransformer {
@@ -37,12 +37,12 @@
           var nY = 0;
           var nZ = 0;
           var r = 0.0;
-          var p = 0.0;
+          var pt = 0.0;
           var y = 0.0;
           var btnA = 0;
           var btnB = 0;
           var btnC = 0;
-          
+
           //var data = {};
 
           // data["X"] = nX;
@@ -107,18 +107,21 @@
                      btnB = num;
                    } else if(sV==="C") {
                      btnC = num;
-                   }  
-                       
+                   }
+
                    // string = "{ X:" + nX / 1000 + ", Y:" + nY / 1000 + ", Z:" + nZ / 1000 + "}";
-                   
+
                    r = Math.atan( nY / nZ );
-                   p = Math.atan( -nX / Math.sqrt(nY*nY+nZ*nZ));
+                   pt = Math.atan( -nX / Math.sqrt(nY*nY+nZ*nZ));
                    if ( btnA == 1 ){
-                        y = y + 6.28 / 360; 
+                        y = y + 6.28 / 360;
                    } else if ( btnB == 1 ){
                         y  = y - 6.28 / 360;
                    } else if ( btnC == 1 ){
                        y = 0;
+                   }
+
+                   if (Math.random()>0.95){
                         var point = this.object3D.getWorldPosition();
                         //球エンティティを生成
                         var ball = document.createElement('a-sphere');
@@ -136,27 +139,28 @@
                         //var force = new THREE.Vector3(dir.x, dir.y, dir.z);
                         var force = new THREE.Vector3(0, 0, 1);
                         //2000倍くらいして結構な力をかける準備をする
-                        force.multiplyScalar(2000);
+                        force.multiplyScalar(3000);
                         //ボールにforceというプロパティを宣言して代入
-                        ball.force = this.object3D.localToWorld(force); 
-        
-                        //物理的演算に必要な情報がballで読み込み終わったら弾を撃つ 
+                        ball.force = this.object3D.localToWorld(force);
+
+                        //物理的演算に必要な情報がballで読み込み終わったら弾を撃つ
                         ball.addEventListener('body-loaded', function (e) {
                             //弾(this)の位置を取得
                             var p = this.object3D.position;
+                            p.y = p.y + 1.5;
                             //先ほど計算した弾(this)に加える勢いを取得
                             var f = this.force;
                             //弾に力を加えて飛ばす
                             this.body.applyForce( new CANNON.Vec3(f.x, f.y, f.z), new CANNON.Vec3(p.x, p.y, p.z) );
                         });
                    }
-                       
+
                    // console.log(value, sV, num, nX, nY, nZ, r, p );
-                    
+
                    // With three.js
-                       el.object3D.rotation.set( -r, y, p );
+                       el.object3D.rotation.set( -r, y, pt );
                        el.object3D.rotation.x += Math.PI/2;
-                   
+
                    //el.setAttribute('scale', JSON.stringify(string));
                    // With three.js
                    //el.object3D.scale.set(nX/500, nY/500, nZ/500);
@@ -180,8 +184,8 @@
       });</script>
 </head>
 <body>
-    <a-scene>
-        <a-box color="#EF2D5E" position="0 1 -4" scale="1 0.8 0.1" handle-events></a-box>
+    <a-scene physics="debug: false; gravity: 0; restitution: 0.1;" background="color: #AAAAAA">
+        <a-box static-body class="collidable" color="#EF2D5E" position="0 1 -4" scale="2 1.6 0.1" handle-events></a-box>
 
         <a-camera><a-cursor></a-cursor></a-camera>
         <a-sky color="#333"></a-sky>
