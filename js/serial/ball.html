@@ -142,12 +142,13 @@
         
                         //物理的演算に必要な情報がballで読み込み終わったら弾を撃つ 
                         ball.addEventListener('body-loaded', function (e) {
-                        //弾(this)の位置を取得
-                        var p = this.object3D.position;
-                        //先ほど計算した弾(this)に加える勢いを取得
-                        var f = this.force;
-                        //弾に力を加えて飛ばす
-                        this.body.applyForce( new CANNON.Vec3(f.x, f.y, f.z), new CANNON.Vec3(p.x, p.y, p.z) );
+                            //弾(this)の位置を取得
+                            var p = this.object3D.position;
+                            //先ほど計算した弾(this)に加える勢いを取得
+                            var f = this.force;
+                            //弾に力を加えて飛ばす
+                            this.body.applyForce( new CANNON.Vec3(f.x, f.y, f.z), new CANNON.Vec3(p.x, p.y, p.z) );
+                        });
                    }
                        
                    // console.log(value, sV, num, nX, nY, nZ, r, p );
