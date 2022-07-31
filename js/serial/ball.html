@@ -5,7 +5,8 @@
     <title>AB-XZ-micro:bit_Cursor Handler - A-Frame School</title>
     <meta name="description" content="Cursor Handler - A-Frame School">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
     <script>// ▼追加した部分1
       class LineBreakTransformer {
           constructor() {
@@ -117,6 +118,37 @@
                         y  = y - 6.28 / 360;
                    } else if ( btnC == 1 ){
                        y = 0;
+                        var point = this.object3D.getWorldPosition();
+                        //球エンティティを生成
+                        var ball = document.createElement('a-sphere');
+                        ball.setAttribute('class', 'ball');
+                        ball.setAttribute('scale', '0.2 0.2 0.2');
+                        ball.setAttribute('position', point);
+                        //物理演算の影響をオンにする
+                        ball.setAttribute('dynamic-body', 'shape: sphere; sphereRadius:0.2; ');
+                        //Instantiate ball entity in a-scene
+                        var scene = document.querySelector('a-scene');
+                        scene.appendChild(ball);
+                        //レイキャスターの向きを取得
+                        // var dir = this.getAttribute("raycaster").direction;
+                        //ボールを飛ばす力を計算
+                        //var force = new THREE.Vector3(dir.x, dir.y, dir.z);
+                        var force = new THREE.Vector3(0, 0, 1);
+                        //2000倍くらいして結構な力をかける準備をする
+                        force.multiplyScalar(2000);
+                        //ボールにforceというプロパティを宣言して代入
+                        ball.force = this.object3D.localToWorld(force); 
+        
+                        //物理的演算に必要な情報がballで読み込み終わったら弾を撃つ 
+                        ball.addEventListener('body-loaded', function (e) {
+                        //弾(this)の位置を取得
+                        var p = this.object3D.position;
+                        //先ほど計算した弾(this)に加える勢いを取得
+                        var f = this.force;
+                        //弾に力を加えて飛ばす
+                        this.body.applyForce(
+                            new CANNON.Vec3(f.x, f.y, f.z), new CANNON.Vec3(p.x, p.y, p.z)
+                        );
                    }
                        
                    // console.log(value, sV, num, nX, nY, nZ, r, p );
