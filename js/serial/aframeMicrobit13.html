@@ -36,6 +36,10 @@
           var nZ = 0;
           var r = 0.0;
           var p = 0.0;
+          var y = 0.0;
+          var btnA = 0;
+          var btnB = 0;
+          var btnC = 0;
           
           //var data = {};
 
@@ -95,16 +99,30 @@
                      nY = num;
                    } else if(sV==="Z") {
                      nZ = num;
-                   }
+                   } else if(sV==="A") {
+                     btnA = num;
+                   } else if(sV==="B") {
+                     btnB = num;
+                   } else if(sV==="C") {
+                     btnC = num;
+                   }  
+                       
                    // string = "{ X:" + nX / 1000 + ", Y:" + nY / 1000 + ", Z:" + nZ / 1000 + "}";
                    
                    r = Math.atan( nY / nZ );
                    p = Math.atan( -nX / Math.sqrt(nY*nY+nZ*nZ));
+                   if ( btnA == 1 ){
+                        y = y + 6.28 / 360; 
+                   } else if ( btnB == 1 ){
+                        y  = y - 6.28 / 360;
+                   } else if ( btnC == 1 ){
+                       y = 0;
+                   }
                        
-                   console.log(value, sV, num, nX, nY, nZ, r, p );
+                   // console.log(value, sV, num, nX, nY, nZ, r, p );
                     
                    // With three.js
-                       el.object3D.rotation.set( -r, 0, p );
+                       el.object3D.rotation.set( -r, y, p );
                        el.object3D.rotation.x += Math.PI/2;
                    
                    //el.setAttribute('scale', JSON.stringify(string));
