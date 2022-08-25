@@ -5,7 +5,13 @@
     <title>AR_Fukuoka</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script>
+      var scene;      //描画する3D空間
+      var rightHand;  //右手の情報を保持する変数
+      var leftHand;   //左手の情報を保持する変数
+      
       window.onload = function() {
+        // 3D空間を変数として保持
+        scene = document.querySelector('a-scene');
         initRightHand(); //右手の初期化
         initLeftHand();  //左手の初期化
       };
