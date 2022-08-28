@@ -40,6 +40,18 @@
       function initLeftHand(){
         
       };
+      function addBox(position){
+        //a-boxという要素を作る
+        var box = document.createElement('a-box');
+        //位置や大きさ、色を設定
+        box.setAttribute('position', position);
+        box.setAttribute('scale', '0.02 0.02 0.02');
+        box.setAttribute('color', '#0062C6');
+        //あとで一括削除しやすいようにクラス名を設定
+        box.setAttribute('class', 'box');
+        //3次元空間にboxを追加
+        scene.appendChild(box);
+      }
     </script>
   </head>
   <body>
