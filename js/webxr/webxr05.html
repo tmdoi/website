@@ -22,7 +22,9 @@
         rightHand = document.getElementById("rightHand");
         //ピンチ開始
         rightHand.addEventListener('pinchstarted', function(e){
-          
+          var position = e.detail.position;
+          //BOX生成関数を呼び出す
+          addBox(position);
         });
         //ピンチ終了
         rightHand.addEventListener('pinchended', function(e){
