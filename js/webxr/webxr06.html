@@ -32,7 +32,9 @@
         });
         //ピンチをしながら手を移動
         rightHand.addEventListener('pinchmoved', function(e){
-          
+          var position = e.detail.position;
+          //BOX生成関数を呼び出す
+          addBox(position);
         });
       };
       
