@@ -18,8 +18,22 @@
       };
       //右手の初期化を行う関数
       function initRightHand(){
-       
+        //右手のオブジェクト（id=rightHand）を取得
+        rightHand = document.getElementById("rightHand");
+        //ピンチ開始
+        rightHand.addEventListener('pinchstarted', function(e){
+          
+        });
+        //ピンチ終了
+        rightHand.addEventListener('pinchended', function(e){
+          
+        });
+        //ピンチをしながら手を移動
+        rightHand.addEventListener('pinchmoved', function(e){
+          
+        });
       };
+      
       //左手の初期化を行う関数
       function initLeftHand(){
         
