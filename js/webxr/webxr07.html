@@ -8,6 +8,7 @@
       var scene;      //描画する3D空間
       var rightHand;  //右手の情報を保持する変数
       var leftHand;   //左手の情報を保持する変数
+      var prev;       //最後にBoxをおいた位置を記録する変数
       
       window.onload = function() {
         // 3D空間を変数として保持
@@ -33,8 +34,13 @@
         //ピンチをしながら手を移動
         rightHand.addEventListener('pinchmoved', function(e){
           var position = e.detail.position;
-          //BOX生成関数を呼び出す
-          addBox(position);
+          //最後にBoxを置いた位置と現在の位置との距離を取得
+          var length = prev.distanceTo(position);
+          //一定距離以上ならBoxを置く
+          if(length>=0.02){
+            //BOX生成関数を呼び出す
+            addBox(position);
+          }
         });
       };
       
@@ -53,6 +59,8 @@
         box.setAttribute('class', 'box');
         //3次元空間にboxを追加
         scene.appendChild(box);
+        //最後にBoxを置いた位置を記録
+        prev = box.object3D.position;
       }
     </script>
   </head>
