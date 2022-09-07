@@ -9,6 +9,11 @@
       var rightHand;  //右手の情報を保持する変数
       var leftHand;   //左手の情報を保持する変数
       var prev;       //最後にBoxをおいた位置を記録する変数
+      //Cubeに割り当てる色の配列
+      var colors = ['#0062C6','#00AB00','#FFCF00','#7F00FF',
+                    '#FFFFFF','#FF2000','#F52394','#593110'];
+      //利用する色の番号
+      var index=0;
       
       window.onload = function() {
         // 3D空間を変数として保持
@@ -29,7 +34,9 @@
         });
         //ピンチ終了
         rightHand.addEventListener('pinchended', function(e){
-          
+          //色の番号を加算して、あとでBoxの色に反映
+          index++;
+          index%=colors.length;
         });
         //ピンチをしながら手を移動
         rightHand.addEventListener('pinchmoved', function(e){
@@ -54,7 +61,8 @@
         //位置や大きさ、色を設定
         box.setAttribute('position', position);
         box.setAttribute('scale', '0.02 0.02 0.02');
-        box.setAttribute('color', '#0062C6');
+        //box.setAttribute('color', '#0062C6');
+        box.setAttribute('color', colors[index]);
         //あとで一括削除しやすいようにクラス名を設定
         box.setAttribute('class', 'box');
         //3次元空間にboxを追加
