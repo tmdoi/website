@@ -53,7 +53,17 @@
       
       //左手の初期化を行う関数
       function initLeftHand(){
-        
+        //左手のオブジェクトを取得
+        leftHand = document.getElemnetById("leftHand");
+        //ピンチ開始時の挙動
+        leftHand.addEventListener('pinchistarted', function(e){
+          //Boxクラスが割り当てられているオブジェクトを全て取得
+          var els = document.querySelectorAll('.box');
+          //一つ一つ削除していく
+          for ( var i=0; i < els.length; i++){
+            els[i].parentNode.removeChild(els[i]);
+          }
+        });
       };
       function addBox(position){
         //a-boxという要素を作る
