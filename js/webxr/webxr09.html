@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AR_Fukuoka</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script>
+      var scene;      //描画する3D空間
+      var rightHand;  //右手の情報を保持する変数
+      var leftHand;   //左手の情報を保持する変数
+      var prev;       //最後にBoxをおいた位置を記録する変数
+      //Cubeに割り当てる色の配列
+      var colors = ['#0062C6','#00AB00','#FFCF00','#7F00FF',
+                    '#FFFFFF','#FF2000','#F52394','#593110'];
+      //利用する色の番号
+      var index=0;
+      
+      window.onload = function() {
+        // 3D空間を変数として保持
+        scene = document.querySelector('a-scene');
+        initRightHand(); //右手の初期化
+        initLeftHand();  //左手の初期化
+        
+      };
+      //右手の初期化を行う関数
+      function initRightHand(){
+        //右手のオブジェクト（id=rightHand）を取得
+        rightHand = document.getElementById("rightHand");
+        //ピンチ開始
+        rightHand.addEventListener('pinchstarted', function(e){
+          var position = e.detail.position;
+          //BOX生成関数を呼び出す
+          addBox(position);
+        });
+        //ピンチ終了
+        rightHand.addEventListener('pinchended', function(e){
+          //色の番号を加算して、あとでBoxの色に反映
+          index++;
+          index%=colors.length;
+        });
+        //ピンチをしながら手を移動
+        rightHand.addEventListener('pinchmoved', function(e){
+          var position = e.detail.position;
+          //最後にBoxを置いた位置と現在の位置との距離を取得
+          var length = prev.distanceTo(position);
+          //一定距離以上ならBoxを置く
+          if(length>=0.02){
+            //BOX生成関数を呼び出す
+            addBox(position);
+          }
+        });
+      };
+      
+      //左手の初期化を行う関数
+      function initLeftHand(){
+        
+      };
+      function addBox(position){
+        //a-boxという要素を作る
+        var box = document.createElement('a-box');
+        //位置や大きさ、色を設定
+        box.setAttribute('position', position);
+        box.setAttribute('scale', '0.02 0.02 0.02');
+        //box.setAttribute('color', '#0062C6');
+        box.setAttribute('color', colors[index]);
+        //あとで一括削除しやすいようにクラス名を設定
+        box.setAttribute('class', 'box');
+        //3次元空間にboxを追加
+        scene.appendChild(box);
+        //最後にBoxを置いた位置を記録
+        prev = box.object3D.position;
+      }
+    </script>
+  </head>
+  <body>
+    <a-scene background="color: #ECECEC">
+      <a-box position="0 1.5 -2" scale="0.5 0.5 0.5" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+      <!--左手の描画-->
+      <a-entity id="leftHand" hand-tracking-controls="hand: left; modelStyle: dots;"></a-entity>
+      <!--右手の描画-->
+      <a-entity id="rightHand" hand-tracking-controls="hand: right; modelStyle: dots;"></a-entity>
+    </a-scene>
+  </body>
+</html>
