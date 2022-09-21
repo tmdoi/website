@@ -14,18 +14,23 @@
                     '#FFFFFF','#FF2000','#F52394','#593110'];
       //利用する色の番号
       var index=0;
+      //指の先端を示す球
+      var tip;
       
       window.onload = function() {
         // 3D空間を変数として保持
         scene = document.querySelector('a-scene');
+        //指先の位置を表す球を取得
+        tip = document.getElementById("tip");
         initRightHand(); //右手の初期化
         initLeftHand();  //左手の初期化
-        
       };
       //右手の初期化を行う関数
       function initRightHand(){
         //右手のオブジェクト（id=rightHand）を取得
         rightHand = document.getElementById("rightHand");
+        //リアルタイムに指の先端を追跡
+        tipTracking(rightHand.components['hand-tracking-controls']);
         //ピンチ開始
         rightHand.addEventListener('pinchstarted', function(e){
           var position = e.detail.position;
@@ -37,6 +42,8 @@
           //色の番号を加算して、あとでBoxの色に反映
           index++;
           index%=colors.length;
+          //指の先端の球にも色を反映
+          
         });
         //ピンチをしながら手を移動
         rightHand.addEventListener('pinchmoved', function(e){
@@ -80,6 +87,14 @@
         //最後にBoxを置いた位置を記録
         prev = box.object3D.position;
       }
+        function tipTracking(ctrl){
+          //指の先端の位置
+          var position = ctrl.indexTipPosition;
+          //指の位置を球に反映
+          tip.setAttribute('position',position);
+          //30ms後にtipTrackingを再度呼ぶ
+          setTimeout(function(){tipTracking(ctrl);},30);
+        }
     </script>
   </head>
   <body>
