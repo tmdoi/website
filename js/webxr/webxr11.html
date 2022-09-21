@@ -43,7 +43,7 @@
           index++;
           index%=colors.length;
           //指の先端の球にも色を反映
-          
+          tip.setAttribute('color',colors[index]);
         });
         //ピンチをしながら手を移動
         rightHand.addEventListener('pinchmoved', function(e){
