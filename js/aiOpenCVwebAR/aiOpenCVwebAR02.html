@@ -49,7 +49,19 @@
       
       //Segmentationの結果を利用する
       function onResults(results) {
-        
+        //canvasのサイズを設定
+        if(!initialized){
+          initialized=true;
+          //canvasのサイズは入力画像の２倍（お好きなサイズでどうぞ）
+          canvasElm.width=result.image.width*2;
+          canvasElm.height=result.image.height*2;
+        }
+        canvasCtx.save();
+        //描画内容をクリア
+        canvasCtx.clearRect(0,0,canvasElm.width,canvasElm.height);
+        //カメラ画像（result.image)をcanvasのサイズに引き伸ばして描画
+        canvasCtx.drawImage(result.image,0,0,canvasElm.width, canvasElm.height);
+        canvasCtx.restore();          
       };
     </script>
   </head>
