@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--Opencvの読み込み (Selfie Segmentationのみの利用なら不要)-->
+    <script src="https://docs.opencv.org/3.4.1/opencv.js"></script>
+    <!--カメラをmediapipeで簡単に利用するためのツール-->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <!--selfie segmentationの読み込み-->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js" crossorigin="anonymous"></script>  
+    <script type="text/javascript">
+      let videoElm ;
+      let canvasElm;
+      let canvasCtx;    
+      let initialized=false;
+      //初期化
+      window.onload = function() {
+        //ビデオ要素の取得
+        videoElm = document.getElementById('input_video');
+        //表示用のCanvasを取得
+        canvasElm = document.getElementById('output_canvas');
+        //Canvas描画に関する情報にアクセス
+        canvasCtx = canvasElm.getContext('2d');
+        
+        //Segmentationを使用するための関連ファイルの取得と初期化
+        let selfieSegmentation = new SelfieSegmentation({locateFile: (file) => {
+          return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
+        }});
+        
+        //Segmentationで使う学習モデルを選択
+        selfieSegmentation.setOptions({
+          modelSelection: 0,
+        });
+        //Segmentation結果を処理する関数を登録
+        selfieSegmentation.onResults(onResults);
+        
+        //カメラの初期化
+        let camera= new Camera(videoElm, {
+          //カメラのフレーム取得毎の処理
+          onFrame: async () => {
+            //カメラの画像を用いてSegmentatonを行う
+            await selfieSegmentation.send({image: videoElm});
+          },
+          width: 640, height: 360
+        });
+        //カメラ動作開始
+        camera.start();
+      };
+      
+      //Segmentationの結果を利用する
+      function onResults(results) {
+        //canvasのサイズを設定
+        if(!initialized){
+          initialized=true;
+          //canvasのサイズは入力画像の２倍（お好きなサイズでどうぞ）
+          canvasElm.width=results.image.width*2;
+          canvasElm.height=results.image.height*2;
+        }
+        canvasCtx.save();
+        //描画内容をクリア
+        canvasCtx.clearRect(0,0,canvasElm.width,canvasElm.height);
+        //カメラ画像（result.image)をcanvasのサイズに引き伸ばして描画
+        canvasCtx.drawImage(results.segmentationMask,0,0,canvasElm.width, canvasElm.height);
+        //不透明な領域に書き込み許可
+        canvasCtx.globalCompositeOperation = 'source-in';
+        //カメラ画像（result.image)を描画
+        canvasCtx.drawImage(results.image,0,0,canvasElm.width, canvasElm.height);
+        canvasCtx.restore();          
+      };
+    </script>
+  </head>
+  
+  <body>
+    <video id="input_video" style="position:absolute; "></video>    
+    <canvas id="output_canvas" style="position:absolute;"></canvas>
+    <canvas id="opencv_canvas" style="position:absolute;"></canvas>
+</body>
+</html>
