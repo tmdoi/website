@@ -61,6 +61,10 @@
         canvasCtx.clearRect(0,0,canvasElm.width,canvasElm.height);
         //カメラ画像（result.image)をcanvasのサイズに引き伸ばして描画
         canvasCtx.drawImage(results.segmentationMask,0,0,canvasElm.width, canvasElm.height);
+        //不透明な領域に書き込み許可
+        canvasCtx.globalCompositeOperation = 'source-in';
+        //カメラ画像（result.image)を描画
+        canvasCtx.drawImage(results.image,0,0,canvasElm.width, canvasElm.height);
         canvasCtx.restore();          
       };
     </script>
