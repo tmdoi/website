@@ -63,13 +63,13 @@
         canvasCtx.drawImage(results.segmentationMask,0,0,canvasElm.width, canvasElm.height);
         //不透明な領域に書き込み許可
         canvasCtx.globalCompositeOperation = 'source-in';
-        //カメラ画像（result.image)を描画
-        canvasCtx.drawImage(results.image,0,0,canvasElm.width, canvasElm.height);
+        //背景色を緑（#00FF00）に設定し、canvasと同じサイズの長方形（Rectangle）を描画
+        canvasCtx.fillStyle = '#00FF00';
+        canvasCtx.fillRect(0,0,canvasElm.width, canvasElm.height);
         //透明な領域に書き込み許可
         canvasCtx.globalCompositeOperation = 'destination-atop';
         //カメラ画像（result.image)を描画
-        canvasCtx.fillStyle = '#00FF00';
-        canvasCtx.fillRect(0,0,canvasElm.width, canvasElm.height);
+        canvasCtx.drawImage(results.image,0,0,canvasElm.width, canvasElm.height);
         canvasCtx.restore();          
       };
     </script>
