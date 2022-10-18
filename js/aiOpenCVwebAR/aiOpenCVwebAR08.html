@@ -85,6 +85,20 @@
       function cvFilter(results){
         //入力画像をOpenCV用のCanvasに表示
         cvCanvasCtx.drawImage(results.image, 0, 0);
+        //cvCanvasElmでの商事画像をOpenCVに渡す（Mat形式）
+        let src = cv.imread(cvCanvasElm);
+        //処理結果を格納するMatを作成
+        let dst = new.cv.Mat();
+        //カラー画像をグレースケールに画層変換
+        cv.cvtColor(src,dst,cv.COLOR_RGB2GRAY,0);
+        //canvasでの表示のためカラー形式に戻す（見た目はグレーのまま）
+        cv.cvtColor(dst,dst, cv.COLOR_GRAY2RGBA);
+        //Matをcanvasで描画できるフォーマットに変換
+        let imgData = new ImageData(new Unit8ClampedArry(dst.data, dst.cols. dst.rows), dst.cols, dst.rows);
+        //画像を描画
+        cvCanvasCtx.putImageData(imgData,0,0);
+        //Matのメモリを開放
+        src.delete(); dst.delete();
       };
     </script>
   </head>
