@@ -90,11 +90,11 @@
         //処理結果を格納するMatを作成
         let dst = new cv.Mat();
         //カラー画像をグレースケールに画層変換
-        cv.cvtColor(src,dst,cv.COLOR_RGB2GRAY,0);
+        cv.cvtColor(src, dst, cv.COLOR_RGB2GRAY, 0);
         //canvasでの表示のためカラー形式に戻す（見た目はグレーのまま）
-        cv.cvtColor(dst,dst, cv.COLOR_GRAY2RGBA);
+        cv.cvtColor(dst, dst, cv.COLOR_GRAY2RGBA);
         //Matをcanvasで描画できるフォーマットに変換
-        let imgData = new ImageData(new Uint8ClampedArray(dst.data, dst.cols. dst.rows), dst.cols, dst.rows);
+        let imgData = new ImageData(new Uint8ClampedArray(dst.data, dst.cols, dst.rows), dst.cols, dst.rows);
         //画像を描画
         cvCanvasCtx.putImageData(imgData,0,0);
         //Matのメモリを開放
