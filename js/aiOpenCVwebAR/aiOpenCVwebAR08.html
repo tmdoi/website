@@ -94,7 +94,7 @@
         //canvasでの表示のためカラー形式に戻す（見た目はグレーのまま）
         cv.cvtColor(dst,dst, cv.COLOR_GRAY2RGBA);
         //Matをcanvasで描画できるフォーマットに変換
-        let imgData = new ImageData(new Unit8ClampedArry(dst.data, dst.cols. dst.rows), dst.cols, dst.rows);
+        let imgData = new ImageData(new Uint8ClampedArray(dst.data, dst.cols. dst.rows), dst.cols, dst.rows);
         //画像を描画
         cvCanvasCtx.putImageData(imgData,0,0);
         //Matのメモリを開放
