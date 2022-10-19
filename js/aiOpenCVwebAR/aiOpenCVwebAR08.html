@@ -88,7 +88,7 @@
         //cvCanvasElmでの商事画像をOpenCVに渡す（Mat形式）
         let src = cv.imread(cvCanvasElm);
         //処理結果を格納するMatを作成
-        let dst = new.cv.Mat();
+        let dst = new cv.Mat();
         //カラー画像をグレースケールに画層変換
         cv.cvtColor(src,dst,cv.COLOR_RGB2GRAY,0);
         //canvasでの表示のためカラー形式に戻す（見た目はグレーのまま）
