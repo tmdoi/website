@@ -20,7 +20,7 @@
         let constraints = { video: { width: 640, height: 480 } };
         //カメラデバイスの取得
         navigator.mediaDevices.getUserMedia(constraints).then(
-          function(medhiaStream) {
+          function(mediaStream) {
             //body内の描画領域(id=video)を取得
             video = document.getElementById("video");
             //リアルタイム映像をvideo要素に対応づける
