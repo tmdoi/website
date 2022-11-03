@@ -11,11 +11,27 @@
     <!--顔認識の学習モデル読み込み-->
     <script src="https://unpkg.com/@tensorflow-models/facemesh@0.0.4/dist/facemesh.js"></script>
     <!--自前のスクリプトを記述-->
-    <script type="text/javascript"> 
+    <script type="text/javascript">
+      //ビデオを扱う変数
+      var video;
       //ページを読みこんだら実行。初期化に使用。
       window.onload = function() {
-
-      };
+        //カメラ画像のサイズ設定（とりあえず640x480くらい）
+        let constraints = { video: { width: 640, height: 480 } };
+        //カメラデバイスの取得
+        navigator.mediaDevices.getUserMedia(constraints).then(
+          function(medhiaStream) {
+            //body内の描画領域(id=video)を取得
+            video = document.getElementById("video");
+            //リアルタイム映像をvideo要素に対応づける
+            video.srcObject = mediaStream;
+            //準備が整ったら再生
+            video.onloadedmetadata = function(e) {
+              video.play();
+            };
+          }
+        );
+      }
       //顔認識の学習モデル読み込み
       async function LoadFaceModel(){
        
