@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AR Fukuoka</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <!--TensorFlow関連の読み込み-->
+    <script src="https://unpkg.com/@tensorflow/tfjs-core@2.1.0/dist/tf-core.js"></script>
+    <script src="https://unpkg.com/@tensorflow/tfjs-converter@2.1.0/dist/tf-converter.js"></script>
+    <script src="https://unpkg.com/@tensorflow/tfjs-backend-webgl@2.1.0/dist/tf-backend-webgl.js"></script>
+    <!--顔認識の学習モデル読み込み-->
+    <script src="https://unpkg.com/@tensorflow-models/facemesh@0.0.4/dist/facemesh.js"></script>
+    <!--自前のスクリプトを記述-->
+    <script type="text/javascript">
+      //ビデオを扱う変数
+      var video;
+      //ページを読みこんだら実行。初期化に使用。
+      window.onload = function() {
+        //カメラ画像のサイズ設定（とりあえず640x480くらい）
+        let constraints = { video: { width: 640, height: 480 } };
+        //カメラデバイスの取得
+        navigator.mediaDevices.getUserMedia(constraints).then(
+          function(mediaStream) {
+            //body内の描画領域(id=video)を取得
+            video = document.getElementById("video");
+            //リアルタイム映像をvideo要素に対応づける
+            video.srcObject = mediaStream;
+            //準備が整ったら再生
+            video.onloadedmetadata = function(e) {
+              video.play();
+            };
+          }
+        );
+      }
+      //顔認識の学習モデル読み込み
+      async function LoadFaceModel(){
+       
+      } 
+      //顔認識をリアルタイムに行う
+      async function FaceTracking(){
+        
+      }      
+    </script>
+  </head>
+  
+  <body>
+    <a-scene id="scene" background="color: #FAFAFA" style="position: absolute;" >
+      <!--表示するオブジェクト-->
+      <a-entity id="objects" position = "0 0 -0.5" scale="1 1 1">
+        <a-box position="-0.1 -0.05 0.1" scale="0.1 0.1 0.1" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+        <a-sphere position="0 0.015 -0.1" radius="0.125" color="#EF2D5E" shadow></a-sphere>
+        <a-cylinder position="0.1 -0.025 0.1" radius="0.05" height="0.15" color="#FFC65D" shadow></a-cylinder>
+        <a-plane position="0 -0.11 0" rotation="-90 0 0" width="0.4" height="0.4" color="#7BC8A4" shadow></a-plane>
+      </a-entity>
+      <!--ウィンドウの向こう側に表示する部屋のオブジェクト-->
+      <a-entity id="room" scale="1 1 1">
+        <a-plane position="0 0.5 -0.5" rotation="90 0 0" src="https://cdn.glitch.com/1ad047f5-9cb1-4677-9ef7-96ff6e630a9b%2Fwall.png?v=1611364672226" ></a-plane>
+        <a-plane position="0 -0.5 -0.5" rotation="-90 0 0" src="https://cdn.glitch.com/1ad047f5-9cb1-4677-9ef7-96ff6e630a9b%2Fwall.png?v=1611364672226" ></a-plane>
+        <a-plane position="-0.5 0 -0.5" rotation="0 90 0" src="https://cdn.glitch.com/1ad047f5-9cb1-4677-9ef7-96ff6e630a9b%2Fwall.png?v=1611364672226" ></a-plane>
+        <a-plane position="0.5 0 -0.5" rotation="0 -90 0" src="https://cdn.glitch.com/1ad047f5-9cb1-4677-9ef7-96ff6e630a9b%2Fwall.png?v=1611364672226"></a-plane>
+        <a-plane position="0 0.0 -1" rotation="0 0 0" src="https://cdn.glitch.com/1ad047f5-9cb1-4677-9ef7-96ff6e630a9b%2Fwall.png?v=1611364672226"></a-plane>
+      </a-entity>
+      <!--カメラ(視点オブジェクト)-->
+      <a-entity camera position="0 0 0" ></a-entity>
+    </a-scene>
+    <!--カメラ画像表示-->
+    <video id="video" style="position: absolute; width:320px; height:240px;"></video>
+  </body>
+  
+</html>
