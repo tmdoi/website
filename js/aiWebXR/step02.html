@@ -14,6 +14,8 @@
     <script type="text/javascript">
       //ビデオを扱う変数
       var video;
+      //顔認識の学習モデル
+      var model;
       //ページを読みこんだら実行。初期化に使用。
       window.onload = function() {
         //カメラ画像のサイズ設定（とりあえず640x480くらい）
@@ -28,17 +30,29 @@
             //準備が整ったら再生
             video.onloadedmetadata = function(e) {
               video.play();
+              //顔認識の学習モデルを読み込む（このあと記述）
+              LoadFaceModel();
             };
           }
         );
       }
       //顔認識の学習モデル読み込み
       async function LoadFaceModel(){
-       
+        //顔認識のための学習モデル読み込み
+        model = await facemesh.load();
+        //顔認識のループ（次のステップで使用）
+        FaceTracking();       
       } 
       //顔認識をリアルタイムに行う
       async function FaceTracking(){
-        
+        //顔の検出
+        let predictions = await model.estimateFaces(video);
+        //見つかった顔が２つ以上あれば
+        if (predictions.length > 0){
+          //検出された顔の情報にアクセスして表示
+          console.log(predictions[0]);
+        }
+        requestAnimationFace(FaceTracking);
       }      
     </script>
   </head>
