@@ -56,8 +56,10 @@
           let topLeft=keypoints.topLeft;
           let bottomRight=keypoints.bottomRight;
           //中心を計算
-          let cX=(topLeft[0]+bottomRight[0])/2;
-          let cY=(topLeft[1]+bottomRight[1])/2;
+          //let cX=(topLeft[0]+bottomRight[0])/2;
+          //let cY=(topLeft[1]+bottomRight[1])/2;
+          let cX=(topLeft[0]+bottomRight[0])/video.videoWidth-1;
+          let cY=(topLeft[1]+bottomRight[1])/video.videoHeight-1;
           console.log(cX+", "+cY);
         }
         requestAnimationFrame(FaceTracking);
