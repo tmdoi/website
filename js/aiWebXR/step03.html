@@ -50,7 +50,15 @@
         //見つかった顔が２つ以上あれば
         if (predictions.length > 0){
           //検出された顔の情報にアクセスして表示
-          console.log(predictions[0]);
+          //console.log(predictions[0]);
+          //バウンディングボックスとその左上・右下の座標を取得
+          let keypoints = predictions[0].boundingBox;
+          let topLeft=keypoints.topLeft;
+          let bottomRight=keypoints.bottomRight;
+          //中心を計算
+          let cX=(topLeft[0]+bottomRight[0])/2;
+          let cY=(topLeft[1]+bottomRight[1])/2;
+          console.log(cX+", "+cY);
         }
         requestAnimationFrame(FaceTracking);
       }      
