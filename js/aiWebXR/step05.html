@@ -18,8 +18,12 @@
       var model;
       //カメラ（視点）を扱う変数
       var camera;
+      var canvas; //描画領域
+      var screenWidth, screenHeight; //表示領域のサイズ
       //ページを読みこんだら実行。初期化に使用。
       window.onload = function() {
+        //キャンバス領域を取得
+        canvas=document.getElementsByClassName('a-canvas')[0];
         //a-scene(id=scene)を取得
         let scene = document.getElementById('scene');
         //A-Frameのカメラを取得
@@ -51,6 +55,16 @@
       } 
       //顔認識をリアルタイムに行う
       async function FaceTracking(){
+        //描画領域のサイズが変わった場合
+        if(screenWidth!=canvas.width || screenHeight!=canvas.height){
+          screenWidth=canvas.width;
+          screenHeight=canvas.height;
+          //部屋の横幅を1に固定した場合の高さを計算
+          let height=screenHeight/screenWidth;
+          //部屋のオブジェクトを取得してサイズを変更
+          leet room= document.getElementById('room');
+          room.setAttribute('scale',{x: 1, y: height, z: 1});
+        }
         //顔の検出
         let predictions = await model.estimateFaces(video);
         //見つかった顔が２つ以上あれば
