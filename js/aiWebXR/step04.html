@@ -16,8 +16,14 @@
       var video;
       //顔認識の学習モデル
       var model;
+      //カメラ（視点）を扱う変数
+      var camera;
       //ページを読みこんだら実行。初期化に使用。
       window.onload = function() {
+        //a-scene(id=scene)を取得
+        let scene = document.getElementById('scene');
+        //A-Frameのカメラを取得
+        camera = scene.camera;
         //カメラ画像のサイズ設定（とりあえず640x480くらい）
         let constraints = { video: { width: 640, height: 480 } };
         //カメラデバイスの取得
@@ -60,7 +66,10 @@
           //let cY=(topLeft[1]+bottomRight[1])/2;
           let cX=(topLeft[0]+bottomRight[0])/video.videoWidth-1;
           let cY=(topLeft[1]+bottomRight[1])/video.videoHeight-1;
-          console.log(cX+", "+cY);
+          //console.log(cX+", "+cY);
+          camera.position.x=-cX; //左右反転
+          camera.position.y=-cY; //上下反転
+          camera.position.z=2.5; //奥行きは分からないので適当に設定
         }
         requestAnimationFrame(FaceTracking);
       }      
