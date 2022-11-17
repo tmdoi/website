@@ -20,6 +20,7 @@
       var camera;
       var canvas; //描画領域
       var screenWidth, screenHeight; //表示領域のサイズ
+      var halfWidth, halfHeight; //表示領域の半分のサイズ
       //ページを読みこんだら実行。初期化に使用。
       window.onload = function() {
         //キャンバス領域を取得
@@ -64,6 +65,8 @@
           //部屋のオブジェクトを取得してサイズを変更
           let room= document.getElementById('room');
           room.setAttribute('scale',{x: 1, y: height, z: 1});
+          halfWidth = 0.5; //今回は横幅を1に固定しているので0.5でOK
+          halfHeight = height/2; //部屋オブジェクトの高さの半分
         }
         //顔の検出
         let predictions = await model.estimateFaces(video);
@@ -81,12 +84,29 @@
           let cX=(topLeft[0]+bottomRight[0])/video.videoWidth-1;
           let cY=(topLeft[1]+bottomRight[1])/video.videoHeight-1;
           //console.log(cX+", "+cY);
-          camera.position.x=-cX; //左右反転
-          camera.position.y=-cY; //上下反転
+          camera.position.x=-cX * halfWidth; //左右反転
+          camera.position.y=-cY * halfHeight; //上下反転
           camera.position.z=2.5; //奥行きは分からないので適当に設定
+          //変換行列を計算してカメラに適用
+          camera.projectionMatrix=PerspectiveOffCenter(
+            (-halfWidth-camaera.position.x), (halfWidth-camera.position.x),
+            (-halfHeight-camaera.position.y), (halfHeight-camera.position.y),
+            camera.position.z, 5);
         }
         requestAnimationFrame(FaceTracking);
-      }      
+      }
+      function PerspectiveOffCenter(left, right, bottom, top, near, far){
+        var x = 2.0 * near / (right - left);
+        var y = 2.0 * near / (top - bottom);
+        var a = ( right + left) / (right - left);
+        var b = (top + bottom) / ( top - bottom);
+        var c = -(far + near) / (far - near);
+        var d = -(2.0 * far * near)/(far - near);
+        var e = -1.0;
+        var m = new THREE.Matrix4();
+        m.set( x,0,a,0,0,y,b,0,0,0,c,d,0,0,e,0);
+        return m;
+      }
     </script>
   </head>
   
