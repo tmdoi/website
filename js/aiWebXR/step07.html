@@ -88,13 +88,14 @@
           camera.position.y=-cY * halfHeight; //上下反転
           camera.position.z=2.5; //奥行きは分からないので適当に設定
           
-          let near = 1; //nearの値を
-          //変換行列を計算してカメラに適用
+          let near = 1; //nearの値をカメラのz(=2.5)ではなくカメラから1m手前に変更
+          let a = near/camera.position.z; //near変更に伴うnear面のサイズ変化の割合
+          
           //変換行列を計算してカメラに適用
           camera.projectionMatrix=PerspectiveOffCenter(
-            (-halfWidth-camera.position.x), (halfWidth-camera.position.x),
-            (-halfHeight-camera.position.y), (halfHeight-camera.position.y),
-            camera.position.z, 5);
+            (-halfWidth-camera.position.x)*a, (halfWidth-camera.position.x)*a,
+            (-halfHeight-camera.position.y)*a, (halfHeight-camera.position.y)*a,
+            near, 5);
         }
         requestAnimationFrame(FaceTracking);
       }
