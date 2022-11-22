@@ -87,6 +87,9 @@
           camera.position.x=-cX * halfWidth; //左右反転
           camera.position.y=-cY * halfHeight; //上下反転
           camera.position.z=2.5; //奥行きは分からないので適当に設定
+          
+          let near = 1; //nearの値を
+          //変換行列を計算してカメラに適用
           //変換行列を計算してカメラに適用
           camera.projectionMatrix=PerspectiveOffCenter(
             (-halfWidth-camera.position.x), (halfWidth-camera.position.x),
@@ -113,7 +116,7 @@
   <body>
     <a-scene id="scene" background="color: #FAFAFA" >
       <!--表示するオブジェクト-->
-      <a-entity id="objects" position = "0 0 -0.5" scale="1 1 1">
+      <a-entity id="objects" position = "0 0 0" scale="1 1 1">
         <a-box position="-0.1 -0.05 0.1" scale="0.1 0.1 0.1" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
         <a-sphere position="0 0.015 -0.1" radius="0.125" color="#EF2D5E" shadow></a-sphere>
         <a-cylinder position="0.1 -0.025 0.1" radius="0.05" height="0.15" color="#FFC65D" shadow></a-cylinder>
