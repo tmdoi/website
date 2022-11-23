@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, WebVR! • A-Frame</title>
+    <meta name="description" content="Hello, WebVR! • A-Frame">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script>
+      AFRAME.registerComponent('markerhandler', {
+        schema: {
+          arobjects: {type: 'selector'}
+        },
+        init: function () {
+          //markerFoundはマーカー検出時に呼ばれる
+          this.el.sceneEl.addEventListener('markerFound', () => {
+          
+          });
+          //markerLostはロスト時に呼ばれる
+          this.el.sceneEl.addEventListener('markerLost', () => {
+            
+          });         　
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene embedded arjs>
+      <a-marker preset="hiro">
+        <a-sphere position="0 1.25 0" radius="1.25" color="#EF2D5E" shadow > </a-sphere>
+        <a-box position="0 0.625 0" scale="1.25 1.25 1.25" color="#00FFFF" shadow></a-box>
+        <a-cylinder position="0 0.75 0" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+      </a-marker>    
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
+
+
