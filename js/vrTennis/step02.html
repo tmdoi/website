@@ -189,16 +189,23 @@
      });
     </script>
     <a-scene physics="debug: false; gravity: 0; restitution: 0.9;" background="color: #AAAAAA">
-      <a-box static-body class="collidable" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       // a-sphere static-body class="collidable" position="0 1.25 -4" radius="0.8" color="#EF2D5E"></a-sphere>
       // a-cylinder static-body class="collidable" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane static-body position="0 0 -5" rotation="-90 0 0" width="10" height="15" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
       // a-plane static-body position="0 5 0" rotation="90 0 0" width="10" height="10" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
-      <a-plane static-body position="0 2 -5" rotation="0 0 0" width="10" height="4" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
       // a-plane static-body position="0 2.5 5" rotation="0 180 0" width="10" height="5" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
+
+      //床
+      <a-plane static-body position="0 0 -5" rotation="-90 0 0" width="10" height="15" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
+      //正面の壁
+      <a-plane static-body position="0 2 -5" rotation="0 0 0" width="10" height="4" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
+      //右の壁
       <a-plane static-body position="5 1 -5" rotation="0 -90 0" width="15" height="2" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
+      //左の壁
       <a-plane static-body position="-5 1 -5" rotation="0 90 0" width="15" height="2" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
-      
+
+      //ラケット
+      <a-box static-body class="collidable" position="0 0 1" rotation="0 45 0" color="#4CC3D9"></a-box>
+
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
           <a-text id="txt" value="--02-v1-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
