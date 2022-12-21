@@ -112,7 +112,7 @@
             ball.setAttribute('scale', '0.2 0.2 0.2');
             ball.setAttribute('position', point);
             //物理演算の影響をオンにする
-            ball.setAttribute('dynamic-body', 'mass: 1; linearDamping: 0.9; shape: sphere; sphereRadius:0.2; ');
+            ball.setAttribute('dynamic-body', 'mass: 0.1; linearDamping: 0.9; shape: sphere; sphereRadius:0.2; ');
             //Instantiate ball entity in a-scene
             var scene = document.querySelector('a-scene');
             scene.appendChild(ball);
