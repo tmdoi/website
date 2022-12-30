@@ -190,8 +190,8 @@
         }
      });
     </script>
-    <a-scene physics="debug: false; gravity: -9.8; restitution: 1.0;" background="color: #AAAAAA">
-      <a-sphere dynamic-body mass="0.75" linearDamping="0.0" shape="sphere" sphereRadius="0.2" position="0 1.0 -9.5" radius="0.2" color="#EF2D5E"> </a-sphere>
+    <a-scene physics="debug: false; gravity: -9.8; restitution: 0.8;" background="color: #AAAAAA">
+      <a-sphere dynamic-body mass="0.75" linearDamping="0.7" shape="sphere" sphereRadius="0.2" position="0 1.0 -9.5" radius="0.2" color="#EF2D5E"> </a-sphere>
       // a-cylinder static-body class="collidable" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       // a-plane static-body position="0 5 0" rotation="90 0 0" width="10" height="10" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
       // a-plane static-body position="0 2.5 5" rotation="0 180 0" width="10" height="5" src="https://tmdoi.github.io/website/js/controller/back.png" shadow></a-plane>
@@ -210,7 +210,7 @@
 
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--12-v1-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--12-v2-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
