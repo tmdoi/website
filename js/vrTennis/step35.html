@@ -18,6 +18,7 @@
         init:function () { //初期化
           const txt = document.getElementById("txt");
           const txt2 = document.getElementById("txt2");
+          const txt3 = document.getElementById("txt3");
           const txtp = document.getElementById("txtp");
           const txtw = document.getElementById("txtw");
           //this.el.grip=false;
@@ -42,7 +43,7 @@
             //複数選択された場合は0番目を覚えさせておく
             this.selectedObj = e.detail.els[0];
             this.selectedObj.setAttribute("color", "yellow");
-            txt.setAttribute("value", this.selectObj);
+            txt3.setAttribute("value", this.selectObj);
             // txt.setAttribute("value", "Raycaster Intersect!");
             // console(this.selectedObj);
             
@@ -53,8 +54,12 @@
             ball.setAttribute('class', 'ball');
             ball.setAttribute('scale', '0.2 0.2 0.2');
             ball.setAttribute('position', point);
+            ball.setAttribute('color', 'blue');
+            ball.setAttribute('radius', '0.05');
+
             //物理演算の影響をオンにする
-            ball.setAttribute('dynamic-body', 'mass:0; shape:sphere; sphereRadius:0.05; color:blue; ');
+            ball.setAttribute('dynamic-body', 'mass:0.01; shape: sphere; sphereRadius: 0.05; ');
+            
             //Instantiate ball entity in a-scene
             var scene = document.querySelector('a-scene');
             scene.appendChild(ball);
@@ -131,7 +136,7 @@
             ball.setAttribute('scale', '0.2 0.2 0.2');
             ball.setAttribute('position', point);
             //物理演算の影響をオンにする
-            ball.setAttribute('dynamic-body', 'mass: 0.75; linearDamping: 0.9; shape: sphere; sphereRadius:0.2; ');
+            ball.setAttribute('dynamic-body', 'mass: 0.75; linearDamping: 0.9; shape: sphere; sphereRadius: 0.2; ');
             //Instantiate ball entity in a-scene
             var scene = document.querySelector('a-scene');
             scene.appendChild(ball);
@@ -234,7 +239,7 @@
 
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--35-v1-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--35-v2-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
@@ -247,7 +252,7 @@
         
         <a-entity raycaster="objects: .collidable; showLine: true; far:2.4;" line="color: orange; opacity: 1.0"
                   oculus-touch-controls="hand: right" input-listen>
-         　　<a-text value="Trigger: shoot a ball\nGrip: Grab large object\nA: Remove small balls"
+         　　<a-text id="txt3" value="Trigger: shoot a ball\nGrip: Grab large object\nA: Remove small balls"
                     　　position="0 0.08 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
           <a-text id="txt2" value="0,0,0,0"     position="0 0.125 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
           <a-text id="txtp" value="p=0,0,0:1.0" position="0 0.150 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
