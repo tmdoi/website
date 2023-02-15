@@ -73,6 +73,18 @@
             //ボールにforceというプロパティを宣言して代入
             this.selectedObj.force = this.object3D.localToWorld(force);
             
+            //物理的演算に必要な情報がballで読み込み終わったら弾を撃つ 
+            this.selectedObj.addEventListener('body-loaded', function (e) {
+              //弾(this)の位置を取得
+              var p = this.object3D.position;
+              //先ほど計算した弾(this)に加える勢いを取得
+              var f = this.force;
+              //弾に力を加えて飛ばす
+              this.body.applyForce(
+                new CANNON.Vec3(f.x, f.y, f.z), new CANNON.Vec3(p.x, p.y, p.z)
+              );
+            });
+
           });
           //レイキャスターの交差が解除されたとき
           this.el.addEventListener('raycaster-intersection-cleared', function (e) {
@@ -248,7 +260,7 @@
 
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--40-v1-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--40-v2-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
