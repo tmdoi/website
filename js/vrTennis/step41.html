@@ -74,7 +74,7 @@
             //500倍くらいして結構な力をかける準備をする
             force.multiplyScalar(500);
             //objにforceというプロパティを宣言して代入
-            rad_ball.force = this.object3D.localToWorld(force);
+            red_ball.force = this.object3D.localToWorld(force);
             
             //物理的演算に必要な情報がballで読み込み終わったら弾を撃つ 
             red_ball.addEventListener('body-loaded', function (e) {
