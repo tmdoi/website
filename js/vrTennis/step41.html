@@ -21,6 +21,8 @@
           const txt3 = document.getElementById("txt3");
           const txtp = document.getElementById("txtp");
           const txtw = document.getElementById("txtw");
+          const red_ball = document.getElementById("red_ball");
+
           //this.el.grip=false;
           this.el.grip=true;
           
@@ -43,7 +45,7 @@
             //複数選択された場合は0番目を覚えさせておく
             this.selectedObj = e.detail.els[0];
             var obj = e.detail.els[0];
-            this.selectedObj.setAttribute("color", "yellow");
+            red_ball.setAttribute("color", "white");
             txt3.setAttribute("value", obj);
             // txt.setAttribute("value", "Raycaster Intersect!");
             // console(this.selectedObj);
