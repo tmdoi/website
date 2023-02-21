@@ -71,7 +71,7 @@
             var dir = this.getAttribute("raycaster").direction;
             //ボールを飛ばす力を計算
             var force = new THREE.Vector3(dir.x, dir.y, -0.1);
-            txtp.setAttribute("value", "RayCas Dir: x="+dir.x.toFixed(2)+",y="+dir.y.toFixed(2)+",z="+dir.z.toFixed(2));
+            txtw.setAttribute("value", "RayCas Dir: x="+dir.x.toFixed(2)+",y="+dir.y.toFixed(2)+",z="+dir.z.toFixed(2));
 
             //1500倍くらいして結構な力をかける準備をする
             force.multiplyScalar(1500);
@@ -213,20 +213,20 @@
         },
         
         tick: function () { //毎フレーム更新
-          if (!this.el.selectedObj) { return; }
-          if (!this.el.grip) { return; }
+          // if (!this.el.selectedObj) { return; }
+          // if (!this.el.grip) { return; }
           //コントローラに追加したraycasterを取得
           var ray = this.el.getAttribute("raycaster").direction;
           //コントローラの1.1m手前の座標を計算(コントローラが原点)  
           var p = new THREE.Vector3(ray.x, ray.y, ray.z);
           p.normalize();
           //txtp.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.sumY.toFixed(2));
-          //txtp.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
+          txtp.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
 
           //var w = new THREE.Vector3(ray.x, ray.y, ray.z);
           var w = new THREE.Vector3(1.0, 0.0, 0.0);
           w.normalize();
-          txtw.setAttribute("value", "w="+w.x.toFixed(2)+","+w.y.toFixed(2)+","+w.z.toFixed(2)+":"+this.el.sumX.toFixed(2));
+          //txtw.setAttribute("value", "w="+w.x.toFixed(2)+","+w.y.toFixed(2)+","+w.z.toFixed(2)+":"+this.el.sumX.toFixed(2));
           
           //スティックの前後により選択されているオブジェクトを前後に移動
           p.multiplyScalar(1.2*this.el.sumY);
@@ -265,7 +265,7 @@
 
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--42-v1-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--42-v2-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
