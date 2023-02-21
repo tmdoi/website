@@ -236,10 +236,10 @@
           //p.y = p.y * 1.2*this.el.sumY;
           //p.z = p.z ;
           //ローカル座標(コントローラ中心)をワールド座標に変換
-          this.el.object3D.localToWorld(p);
+          // 2023.02.22 this.el.object3D.localToWorld(p);
           //Raycasterの先端に選択オブジェクトを追従させる
           //this.el.selectedObj.object3D.position.set(p.x, p.y, p.z);
-          this.el.selectedObj.object3D.position.set(p.x*3.0 , 0 , -1.8 );
+          // 2023.02.22 this.el.selectedObj.object3D.position.set(p.x*3.0 , 0 , -1.8 );
         }
      });
     </script>
