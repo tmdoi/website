@@ -70,21 +70,21 @@
             //レイキャスターの向きを取得
             var dir = this.getAttribute("raycaster").direction;
             //ボールを飛ばす力を計算
-            var force = new THREE.Vector3(dir.x, dir.y, -0.1);
-            txtw.setAttribute("value", "RayCas Dir: x="+dir.x.toFixed(2)+",y="+dir.y.toFixed(2)+",z="+dir.z.toFixed(2));
+            var force = new THREE.Vector3(dir.x, dir.y, -1);
+            txtw.setAttribute("value", "RayCas Dir: x="+dir.x+",y="+dir.y+",z="+dir.z);
 
-            //1500倍くらいして結構な力をかける準備をする
-            force.multiplyScalar(1500);
+            //3000倍くらいして結構な力をかける準備をする
+            force.multiplyScalar(3000);
             //objにforceというプロパティを宣言して代入
             red_ball.force = this.object3D.localToWorld(force);
             
             //物理的演算に必要な情報がballで読み込み終わったら弾を撃つ 
             //red_ball.addEventListener('body-loaded', function (e) {
-              //弾(this)の位置を取得
+              //赤玉(red_ball)の位置を取得
               var p = red_ball.object3D.position;
-              //先ほど計算した弾(this)に加える勢いを取得
+              //先ほど計算した赤玉(red_ball)に加える勢いを取得
               var f = red_ball.force;
-              //弾に力を加えて飛ばす
+              //赤玉(red_ball)に力を加えて飛ばす
               red_ball.body.applyForce(
                 new CANNON.Vec3(f.x, f.y, f.z), new CANNON.Vec3(p.x, p.y, p.z)
               );
@@ -265,7 +265,7 @@
 
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--42-v2-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--42-v3-" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
@@ -282,7 +282,7 @@
                     　　position="0 0.08 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
           <a-text id="txt2" value="0,0,0,0"     position="0 0.125 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
           <a-text id="txtp" value="p=0,0,0:1.0" position="0 0.150 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
-          <a-text id="txtw" value="w=0,0,0:0.0" position="0 0.175 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txtw" value="w=0,0,0:0.0" position="0 0.175 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#7f7f7f"></a-text>
 
         </a-entity>
         
