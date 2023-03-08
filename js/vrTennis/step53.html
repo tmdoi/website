@@ -226,7 +226,6 @@
           var p = new THREE.Vector3(ray.x, ray.y, ray.z);
           p.normalize();
           //txtp.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.sumY.toFixed(2));
-          txtp.setAttribute("Value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
 
           //var w = new THREE.Vector3(ray.x, ray.y, ray.z);
           var w = new THREE.Vector3(1.0, 0.0, 0.0);
@@ -243,7 +242,8 @@
           //ローカル座標(コントローラ中心)をワールド座標に変換
           // 2023.02.22 this.el.object3D.localToWorld(p);
           //Raycasterの先端に選択オブジェクトを追従させる
-          p = handL.object3D.getWorldPosition(position);
+          p = handL.object3D.position;
+          txtp.setAttribute("Value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
           racket.object3D.position.set(p.x, p.y, p.z);
           // 2023.02.22 this.el.selectedObj.object3D.position.set(p.x*3.0 , 0 , -1.8 );
         }
