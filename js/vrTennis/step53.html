@@ -245,9 +245,9 @@
           p = handL.object3D.position;
           racket.object3D.position.set(p.x, p.y, p.z);
           w = handL.object3D.rotation;
-          racket.object3D.rotaion.set(w.x, w.y, w.z);
-          txtw.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
-          txtp.setAttribute("Value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
+          racket.object3D.rotation.set(w.x, w.y, w.z);
+          txtp.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2));
+          txtw.setAttribute("Value", "w="+w.x.toFixed(1)+","+w.y.toFixed(1)+","+w.z.toFixed(1));
           // 2023.02.22 this.el.selectedObj.object3D.position.set(p.x*3.0 , 0 , -1.8 );
         }
      });
@@ -290,8 +290,8 @@
          　　<a-text id="txt3" value="Trigger: shoot a ball\nGrip: Grab large object\nA: Remove small balls"
                     　　position="0 0.08 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
           <a-text id="txt2" value="0,0,0,0"     position="0 0.125 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
-          <a-text id="txtp" value="p=0,0,0:1.0" position="0 0.150 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
-          <a-text id="txtw" value="w=0,0,0:0.0" position="0 0.175 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#7f7f7f"></a-text>
+          <a-text id="txtp" value="p=0,0,0:1.0" position="0 0.175 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txtw" value="w=0,0,0:0.0" position="0 0.150 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#7f7f7f"></a-text>
 
         </a-entity>
         
