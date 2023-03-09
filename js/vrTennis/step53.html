@@ -75,7 +75,7 @@
             var dir = this.getAttribute("raycaster").direction;
             //ボールを飛ばす力を計算
             var force = new THREE.Vector3(dir.x, dir.y, -1);
-            txtw.setAttribute("value", "RayCas Dir: x="+dir.x+",y="+dir.y+",z="+dir.z);
+            //txtw.setAttribute("value", "RayCas Dir: x="+dir.x+",y="+dir.y+",z="+dir.z);
 
             //2000倍くらいして結構な力をかける準備をする
             force.multiplyScalar(2000);
@@ -243,8 +243,11 @@
           // 2023.02.22 this.el.object3D.localToWorld(p);
           //Raycasterの先端に選択オブジェクトを追従させる
           p = handL.object3D.position;
-          txtp.setAttribute("Value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
           racket.object3D.position.set(p.x, p.y, p.z);
+          w = handL.object3D.rotation;
+          racket.object3D.rotaion.set(w.x, w.y, w.z);
+          txtw.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
+          txtp.setAttribute("Value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.el.sumY.toFixed(2));
           // 2023.02.22 this.el.selectedObj.object3D.position.set(p.x*3.0 , 0 , -1.8 );
         }
      });
@@ -271,7 +274,7 @@
 
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--53-v2--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--53-v3--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity id="handL" teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
