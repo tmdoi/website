@@ -224,10 +224,10 @@
           // if (!this.el.selectedObj) { return; }
           // if (!this.el.grip) { return; }
           //コントローラに追加したraycasterを取得
-          //var ray = this.el.getAttribute("raycaster").direction;
+          var ray = this.el.getAttribute("raycaster").direction;
           //コントローラの1.1m手前の座標を計算(コントローラが原点)  
-          //var p = new THREE.Vector3(ray.x, ray.y, ray.z);
-          //p.normalize();
+          var p = new THREE.Vector3(ray.x, ray.y, ray.z);
+          p.normalize();
           //txtp.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2)+":"+this.sumY.toFixed(2));
 
           //var w = new THREE.Vector3(ray.x, ray.y, ray.z);
@@ -248,7 +248,7 @@
           p = handL.object3D.position;
           racket.object3D.position.set(p.x, p.y, p.z);
           w = handL.object3D.rotation;
-          racket.object3D.rotation.set(w.x+45 , w.y, w.z);
+          racket.object3D.rotation.set(w.x , w.y, w.z);
           txtp.setAttribute("value", "p="+p.x.toFixed(2)+","+p.y.toFixed(2)+","+p.z.toFixed(2));
           txtw.setAttribute("Value", "w="+w.x.toFixed(1)+","+w.y.toFixed(1)+","+w.z.toFixed(1));
           // 2023.02.22 this.el.selectedObj.object3D.position.set(p.x*3.0 , 0 , -1.8 );
@@ -275,12 +275,12 @@
       <a-entity id="racket"> 
         <a-cylinder static-body class="collidable" position="0 0 -1.0" rotation="0 90 0" radius="0.35"  height="0.050" color="yellow"></a-cylinder>
         <a-cylinder static-body class="collidable" position="0 0 -0.5" rotation="90 0 0" radius="0.05"  height="1.0" color="yellow"></a-cylinder>
-        // a-box static-body class="collidable" position="0 0.25 0" rotation="0 0 0" depth="0.5" height="0.5" width="2" color="#4CC3D9"></a-box>
       </a-entity>
+        // a-box static-body class="collidable" position="0 0.25 0" rotation="0 0 0" depth="0.5" height="0.5" width="2" color="#4CC3D9"></a-box>
     
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--61-v3--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--61-v4--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity id="handL" teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
