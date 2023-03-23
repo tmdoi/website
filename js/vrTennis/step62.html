@@ -47,6 +47,9 @@
             //複数選択された場合は0番目を覚えさせておく
             this.selectedObj = e.detail.els[0];
             var obj = e.detail.els[0];
+            
+            txt2.setAttribute("value", obj==racket );
+            
             if(obj==racket){ 
               red_ball.setAttribute("color", "blue");
               return; }
@@ -295,9 +298,9 @@
                   oculus-touch-controls="hand: right" input-listen>
          　　<a-text id="txt3" value="Trigger: shoot a ball\nGrip: Grab large object\nA: Remove small balls"
                     　　position="0 0.08 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
-          <a-text id="txt2" value="0,0,0,0"     position="0 0.125 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt2" value="0,0,0,0"     position="0 0.125 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="green"></a-text>
           <a-text id="txtp" value="p=0,0,0:1.0" position="0 0.175 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
-          <a-text id="txtw" value="w=0,0,0:0.0" position="0 0.150 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#7f7f7f"></a-text>
+          <a-text id="txtw" value="w=0,0,0:0.0" position="0 0.150 0" rotation="-90 0 0" scale="0.1 0.1 0.1" align="center" color="#FFFFFF"></a-text>
 
         </a-entity>
         
