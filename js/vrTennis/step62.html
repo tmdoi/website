@@ -50,7 +50,7 @@
             
             txt2.setAttribute("value", "["+ obj.id + "]" );
             
-            if(obj.id=="racket"){ 
+            if(obj.id[0]=="r"){ 
               red_ball.setAttribute("color", "blue");
               return; }
             
@@ -284,7 +284,7 @@
     
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--62-v6--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--62-v7--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity id="handL" teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
