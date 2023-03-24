@@ -277,14 +277,14 @@
 
       //丸いラケット
       <a-entity id="racket"> 
-        <a-cylinder static-body class="collidable" position="0 0 -1.0" rotation="0 90 0" radius="0.35"  height="0.050" color="yellow"></a-cylinder>
-        <a-cylinder static-body class="collidable" position="0 0 -0.5" rotation="90 0 0" radius="0.05"  height="1.0" color="yellow"></a-cylinder>
+        <a-cylinder id="racket_disk" static-body class="collidable" position="0 0 -1.0" rotation="0 90 0" radius="0.50"  height="0.050" color="yellow"></a-cylinder>
+        <a-cylinder id="racket_pole" static-body class="collidable" position="0 0 -0.5" rotation="90 0 0" radius="0.05"  height="1.0" color="yellow"></a-cylinder>
       </a-entity>
         // a-box static-body class="collidable" position="0 0.25 0" rotation="0 0 0" depth="0.5" height="0.5" width="2" color="#4CC3D9"></a-box>
     
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--62-v5--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--62-v6--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity id="handL" teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
