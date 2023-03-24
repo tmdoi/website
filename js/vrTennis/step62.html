@@ -48,7 +48,7 @@
             this.selectedObj = e.detail.els[0];
             var obj = e.detail.els[0];
             
-            txt2.setAttribute("value", obj.id );
+            txt2.setAttribute("value", "["+ obj.id + "]" );
             
             if(obj.id=="racket"){ 
               red_ball.setAttribute("color", "blue");
@@ -85,7 +85,7 @@
             //txtw.setAttribute("value", "RayCas Dir: x="+dir.x+",y="+dir.y+",z="+dir.z);
 
             //1500倍くらいして結構な力をかける準備をする
-            force.multiplyScalar(1500);
+            force.multiplyScalar(00);
             //objにforceというプロパティを宣言して代入
             red_ball.force = this.object3D.localToWorld(force);
             
@@ -284,7 +284,7 @@
     
       <a-entity id="cameraRig">
         <a-entity id="head" camera  wasd-controls look-controls position="0 1.6 0">
-          <a-text id="txt" value="--62-v4--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
+          <a-text id="txt" value="--62-v5--" position="0 0.3 -1" scale="0.25 0.25 0.25" align="center" color="#FFFFFF"></a-text>
         </a-entity>
       
         <a-entity id="handL" teleport-controls="cameraRig: #cameraRig; teleportOrigin:#head;
