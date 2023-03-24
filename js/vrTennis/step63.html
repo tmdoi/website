@@ -84,8 +84,8 @@
             var force = new THREE.Vector3(dir.x, dir.y, -1);
             //txtw.setAttribute("value", "RayCas Dir: x="+dir.x+",y="+dir.y+",z="+dir.z);
 
-            //1500倍くらいして結構な力をかける準備をする
-            force.multiplyScalar(00);
+            //1000倍くらいして結構な力をかける準備をする
+            force.multiplyScalar(1000);
             //objにforceというプロパティを宣言して代入
             red_ball.force = this.object3D.localToWorld(force);
             
