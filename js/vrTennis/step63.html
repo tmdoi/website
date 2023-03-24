@@ -57,7 +57,7 @@
             this.selectedObj = red_ball;
             var obj = red_ball;
             red_ball.setAttribute("color", "white");
-            txt3.setAttribute("value", obj);
+            //txt3.setAttribute("value", obj);
             // txt.setAttribute("value", "Raycaster Intersect!");
             // console(this.selectedObj);
             
@@ -107,8 +107,10 @@
             //選択オブジェクトの情報をリセット
             // this.selectedObj = null; color="#EF2D5E"
             // this.selectedObj.setAttribute("color", "#EF2D5E");
+            obj = null;
             red_ball.setAttribute("color", "#EF2D5E");
             txt.setAttribute("value", "Raycaster Not Cleared");
+            txt2.setAttribute("value", "["+ obj.id + "]" );
           });
           
           //xボタンを押し始めたときに実行される(左手のみ)
