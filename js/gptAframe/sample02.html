@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>A-Frame Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- 床: 幅5m, 奥行き5m, 原点x=0m, y=0m, z=-2m -->
+      <a-plane
+        position="0 0 -2"
+        rotation="-90 0 0"
+        width="5"
+        height="5"
+        src="https://tmdoi.github.io/website/js/controller/back.png"
+      ></a-plane>
+
+      <!-- 壁: 高さ3m -->
+      <!-- 前壁 -->
+      <a-plane
+        position="0 1.5 -4.5"
+        width="5"
+        height="3"
+        src="https://tmdoi.github.io/website/js/controller/back.png"
+      ></a-plane>
+      <!-- 後壁 -->
+      <a-plane
+        position="0 1.5 0.5"
+        rotation="0 180 0"
+        width="5"
+        height="3"
+        src="https://tmdoi.github.io/website/js/controller/back.png"
+      ></a-plane>
+      <!-- 左壁 -->
+      <a-plane
+        position="-2.5 1.5 -2"
+        rotation="0 90 0"
+        width="5"
+        height="3"
+        src="https://tmdoi.github.io/website/js/controller/back.png"
+      ></a-plane>
+      <!-- 右壁 -->
+      <a-plane
+        position="2.5 1.5 -2"
+        rotation="0 -90 0"
+        width="5"
+        height="3"
+        src="https://tmdoi.github.io/website/js/controller/back.png"
+      ></a-plane>
+
+      <!-- 天井: 床と同じ大きさで壁の上の辺に接する -->
+      <a-plane
+        position="0 3 -2"
+        rotation="90 0 0"
+        width="5"
+        height="5"
+        src="https://tmdoi.github.io/website/js/controller/back.png"
+      ></a-plane>
+
+      <!-- カメラとカーソル -->
+      <a-camera position="0 1.6 0">
+        <a-cursor color="#4CC3D9"></a-cursor>
+      </a-camera>
+
+      <!-- ライト -->
+      <a-light type="directional" color="#FFF" intensity="1" position="0 1 0"></a-light>
+    </a-scene>
+  </body>
+</html>
