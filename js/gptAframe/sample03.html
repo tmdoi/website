@@ -58,11 +58,21 @@
         src="back.png"
       ></a-plane>
 
-      <!-- カメラとカーソル -->
-      <a-camera position="0 1.6 0">
-        <a-cursor color="#4CC3D9"></a-cursor>
-      </a-camera>
-
+      <!-- カメラ、カーソル、コントローラ -->
+      <a-entity id="rig" position="0 1.6 0">
+        <a-camera>
+          <a-cursor color="#4CC3D9"></a-cursor>
+        </a-camera>
+        <a-entity
+          id="left-hand"
+          teleport-controls="type: parabolic; collisionEntities: [mixin='collidable']"
+          oculus-touch-controls="hand: left"
+          windows-motion-controls="hand: left"
+          vive-controls="hand: left"
+        ></a-entity>
+      </a-entity>
+      
+      
       <!-- ライト -->
       <a-light type="directional" color="#FFF" intensity="1" position="2 5 -2"></a-light>
       <a-light type="ambient" color="#fff" intensity="0.5"></a-light>
