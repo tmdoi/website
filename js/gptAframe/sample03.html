@@ -4,11 +4,13 @@
     <meta charset="utf-8" />
     <title>A-Frame Demo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
   </head>
   <body>
     <a-scene>
       <!-- 床: 幅5m, 奥行き5m, 原点x=0m, y=0m, z=-2m -->
       <a-plane
+        mixin="collidable"
         position="0 0 -2"
         rotation="-90 0 0"
         width="5"
@@ -19,6 +21,7 @@
       <!-- 壁: 高さ3m -->
       <!-- 前壁 -->
       <a-plane
+        mixin="collidable"
         position="0 1.5 -4.5"
         width="5"
         height="3"
@@ -26,6 +29,7 @@
       ></a-plane>
       <!-- 後壁 -->
       <a-plane
+        mixin="collidable"
         position="0 1.5 0.5"
         rotation="0 180 0"
         width="5"
@@ -34,6 +38,7 @@
       ></a-plane>
       <!-- 左壁 -->
       <a-plane
+        mixin="collidable"
         position="-2.5 1.5 -2"
         rotation="0 90 0"
         width="5"
@@ -42,6 +47,7 @@
       ></a-plane>
       <!-- 右壁 -->
       <a-plane
+        mixin="collidable"
         position="2.5 1.5 -2"
         rotation="0 -90 0"
         width="5"
@@ -51,6 +57,7 @@
 
       <!-- 天井: 床と同じ大きさで壁の上の辺に接する -->
       <a-plane
+        mixin="collidable"
         position="0 3 -2"
         rotation="90 0 0"
         width="5"
@@ -70,12 +77,17 @@
           windows-motion-controls="hand: left"
           vive-controls="hand: left"
         ></a-entity>
+        <a-entity
+          id="right-hand"
+          oculus-touch-controls="hand: right"
+          windows-motion-controls="hand: right"
+          vive-controls="hand: right"
+        ></a-entity>
       </a-entity>
-      
-      
+
       <!-- ライト -->
       <a-light type="directional" color="#FFF" intensity="1" position="2 5 -2"></a-light>
-      <a-light type="ambient" color="#fff" intensity="0.5"></a-light>
+      <a-light type="ambient" color="#BBB"></a-light>
     </a-scene>
   </body>
 </html>
