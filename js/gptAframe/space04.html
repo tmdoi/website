@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>宇宙空間VR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- 星空の背景 -->
+      <a-sky color="#000000" src="https://cdn.glitch.com/69e2f2dd-0a24-4f7f-a9a1-9f1d3890d63e%2Fstars.jpg"></a-sky>
+
+      <!-- 地球 -->
+      <a-sphere
+        position="0 0 -10"
+        radius="1"
+        src="https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/textures/planets/earth_atmos_2048.jpg">
+      </a-sphere>
+
+      <!-- 月 -->
+      <a-sphere
+        position="2 0 -15"
+        radius="0.25"
+        src="https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/textures/">
+      </a-sphere>
+
+      <!-- 太陽 -->
+      <a-sphere
+        position="0 10 -20"
+        radius="3"
+        src="https://cdn.jsdelivr.net/gh/mrdoob/three.js/examples/textures/planets/sun.jpg">
+      </a-sphere>
+
+      <!-- カメラ -->
+      <a-entity
+        id="camera-rig"
+        position="0 1.6 0"
+      >
+        <a-camera
+          wasd-controls-enabled="true"
+          look-controls-enabled="true"
+        ></a-camera>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
