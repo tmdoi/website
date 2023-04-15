@@ -13,11 +13,12 @@
 
         onKeyDown: function(event) {
           const rotationSpeed = 5;
+          const currentRotation = this.el.getAttribute('rotation');
 
           if (event.key === 'q') {
-            this.el.object3D.rotation.y += THREE.Math.degToRad(rotationSpeed);
+            this.el.setAttribute('rotation', {x: currentRotation.x, y: currentRotation.y + rotationSpeed, z: currentRotation.z});
           } else if (event.key === 'e') {
-            this.el.object3D.rotation.y -= THREE.Math.degToRad(rotationSpeed);
+            this.el.setAttribute('rotation', {x: currentRotation.x, y: currentRotation.y - rotationSpeed, z: currentRotation.z});
           }
         }
       });
