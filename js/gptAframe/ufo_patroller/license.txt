@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ufo Patroller
+* source:	https://sketchfab.com/3d-models/ufo-patroller-a0e8355c267d47ebbcb0d340ed11055e
+* author:	Trockk (https://sketchfab.com/Timrockk)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ufo Patroller" (https://sketchfab.com/3d-models/ufo-patroller-a0e8355c267d47ebbcb0d340ed11055e) by Trockk (https://sketchfab.com/Timrockk) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
