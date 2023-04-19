@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script>
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+function getRandomSpherePoint(x0, y0, z0, radius) {
+  const u = Math.random();
+  const v = Math.random();
+  const theta = 2 * Math.PI * u;
+  const phi = Math.acos(2 * v - 1);
+  const x = x0 + radius * Math.sin(phi) * Math.cos(theta);
+  const y = y0 + radius * Math.sin(phi) * Math.sin(theta);
+  const z = z0 + radius * Math.cos(phi);
+  return {
+    x,
+    y,
+    z
+  };
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const scene = document.querySelector("a-scene");
+  const numSpheres = 300;
+  for (let i = 0; i < numSpheres; i++) {
+    const sphere = document.createElement("a-sphere");
+    const position = getRandomSpherePoint(0, 1.6, 0, 100);
+    const radius = getRandomArbitrary(0.5, 1);
+    sphere.setAttribute("position", position);
+    sphere.setAttribute("radius", radius);
+    sphere.setAttribute("color", "#FFF");
+    scene.appendChild(sphere);
+  }
+});
+</script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky color="#3a0f57"></a-sky>
+
+      <a-entity id="ufo" gltf-model="https://tmdoi.github.io/website/js/gptAframe/ufo_patroller/scene.gltf" position="0 2 -5" scale="0.5 0.5 0.5"></a-entity>
+
+      <a-entity id="missile">
+        <a-sphere position="0 1 -4" radius="0.1" color="#0000FF"></a-sphere>
+        <a-animation attribute="position" to="0 1 5" dur="3000" repeat="indefinite"></a-animation>
+      </a-entity>
+
+      <a-entity id="player">
+        <a-camera position="0 1.6 0"></a-camera>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
