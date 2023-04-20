@@ -25,10 +25,10 @@ function animateMissile(missile) {
   const newPos = {
     x: currentPos.x,
     y: currentPos.y,
-    z: currentPos.z + 0.01
+    z: currentPos.z + 0.25
   };
   missile.setAttribute("position", newPos);
-  if (newPos.z > 5) {
+  if (newPos.z > 8) {
     missile.setAttribute("position", "0 1 -4");
   }
   requestAnimationFrame(() => animateMissile(missile));
