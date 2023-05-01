@@ -1,1 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <a-scene physics="debug: false; gravity: -9.8">
+      <a-box position="0 -0.25 0" width="50" height="0.5" depth="50" static-body></a-box>
 
+      <a-assets>
+        <a-mixin id="domino" geometry="primitive: box; width: 0.25; height: 0.5; depth: 0.1" material="color: #FFC107" dynamic-body="mass: 5; friction: 0.5"></a-mixin>
+      </a-assets>
+
+      <a-entity id="dominoes"></a-entity>
+
+      <a-camera position="0 1.6 5">
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
