@@ -6,14 +6,14 @@ window.addEventListener("DOMContentLoaded", function () {
     const domino = document.createElement("a-entity");
     domino.setAttribute("mixin", "domino");
     domino.setAttribute("position", `0 0.25 ${-0.2 * (i + 1)}`);
-    dominoes.appendChild(domino);
-  }
+dominoes.appendChild(domino);
+}
 
-  const firstDomino = dominoes.children[0];
-  setTimeout(() => {
-    firstDomino.setAttribute(
-      "animation",
-      "property: rotation; to: 0 -90 0; dur: 1000; easing: ease-in"
+const firstDomino = dominoes.children[0];
+setTimeout(() => {
+  firstDomino.components["dynamic-body"].applyImpulse(
+    new THREE.Vector3(-5, 0, 0),
+    new THREE.Vector3().copy(firstDomino.getAttribute("position"))
     );
   }, 3000);
 });
