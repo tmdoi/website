@@ -28,7 +28,8 @@ window.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
     firstDomino.components["dynamic-body"].applyImpulse(
       new THREE.Vector3(0, 0, 5), // 方向を修正しました
-      new THREE.Vector3().copy(firstDomino.getAttribute("position"))
+      new THREE.Vector3(0, 0, 0)
+      //new THREE.Vector3().copy(firstDomino.getAttribute("position"))
     );
   }, 3000);
 });
