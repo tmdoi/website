@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   const firstDomino = dominoes.children[0];
-  firstDomino.setAttribute("material", "color: #0000FF"); // 1つ目のドミノを青色に変更
+  firstDomino.setAttribute("color", "#0000FF"); // 1つ目のドミノを青色に変更
 
   function countdown(seconds) {
     timer.setAttribute("text", "value", seconds);
@@ -29,12 +29,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
   countdown(3);
 
-  firstDomino.addEventListener("body-loaded", () => {
-    setTimeout(() => {
-      firstDomino.components["dynamic-body"].applyImpulse(
-        new THREE.Vector3(0, 0, 5),
-        new THREE.Vector3().copy(firstDomino.getAttribute("position"))
-      );
-    }, 3000);
-  });
+  setTimeout(() => {
+    firstDomino.components["dynamic-body"].applyImpulse(
+      new THREE.Vector3(0, 0, 5),
+      new THREE.Vector3().copy(firstDomino.getAttribute("position"))
+    );
+  }, 3000);
 });
