@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", function () {
     domino.setAttribute("depth", "0.1");
     domino.setAttribute("color", "#FFC107");
     domino.setAttribute("position", `0 0.25 ${-0.2 * (i + 1)}`);
-    domino.setAttribute("dynamic-body", "mass: 5; friction: 0.5");
+    domino.setAttribute("dynamic-body", "shape: box; mass: 0.25; friction: 0.5");
     dominoes.appendChild(domino);
   }
 
