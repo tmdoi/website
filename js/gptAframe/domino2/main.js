@@ -4,10 +4,13 @@ window.addEventListener("DOMContentLoaded", function () {
   const timer = document.getElementById("timer");
 
   for (let i = 0; i < 100; i++) {
-    const domino = document.createElement("a-entity");
-    domino.setAttribute("mixin", "domino");
+    const domino = document.createElement("a-box");
+    domino.setAttribute("width", "0.25");
+    domino.setAttribute("height", "0.5");
+    domino.setAttribute("depth", "0.1");
+    domino.setAttribute("color", "#FFC107");
     domino.setAttribute("position", `0 0.25 ${-0.2 * (i + 1)}`);
-    domino.setAttribute("dynamic-body", "mass: 5; friction: 0.5"); // dynamic-body を直接設定
+    domino.setAttribute("dynamic-body", "mass: 5; friction: 0.5");
     dominoes.appendChild(domino);
   }
 
