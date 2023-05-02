@@ -7,14 +7,14 @@
   </head>
   <body>
     <a-scene physics="debug: false; gravity: -9.8">
-      <a-box position="0 -1.35 0" width="50" height="0.5" depth="50" static-body></a-box>
+      <a-box position="0 -0.25 0" width="50" height="0.5" depth="50" static-body></a-box>
 
       <a-assets>
-        <a-mixin id="domino" geometry="primitive: box; width: 0.25; height: 0.5; depth: 0.05" material="color: #FFC107" dynamic-body="mass: 5; friction: 0.5"></a-mixin>
+        <a-mixin id="domino" geometry="primitive: box; width: 0.25; height: 0.5; depth: 0.1" material="color: #FFC107"></a-mixin>
       </a-assets>
 
       <a-entity id="dominoes"></a-entity>
-      
+
       <a-entity id="timer" text="value: 3; width: 10; align: center; color: #000000" position="0 2 -2"></a-entity>
 
       <a-camera position="0 1.6 5">
