@@ -29,10 +29,12 @@ window.addEventListener("DOMContentLoaded", function () {
 
   countdown(3);
 
-  setTimeout(() => {
-    firstDomino.components["dynamic-body"].applyImpulse(
-      new THREE.Vector3(0, 0, 5),
-      new THREE.Vector3().copy(firstDomino.getAttribute("position"))
-    );
-  }, 3000);
+  firstDomino.addEventListener("body-loaded", () => {
+    setTimeout(() => {
+      firstDomino.components["dynamic-body"].applyImpulse(
+        new THREE.Vector3(0, 0, 5),
+        new THREE.Vector3().copy(firstDomino.getAttribute("position"))
+      );
+    }, 3000);
+  });
 });
