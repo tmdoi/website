@@ -7,6 +7,7 @@ window.addEventListener("DOMContentLoaded", function () {
     const domino = document.createElement("a-entity");
     domino.setAttribute("mixin", "domino");
     domino.setAttribute("position", `0 0.25 ${-0.2 * (i + 1)}`);
+    domino.setAttribute("dynamic-body", "mass: 5; friction: 0.5"); // dynamic-body を直接設定
     dominoes.appendChild(domino);
   }
 
@@ -22,14 +23,13 @@ window.addEventListener("DOMContentLoaded", function () {
       }, 1000);
     }
   }
-  
+
   countdown(3);
-  
+
   setTimeout(() => {
     firstDomino.components["dynamic-body"].applyImpulse(
-      new THREE.Vector3(0, 0, 5), // 方向を修正しました
-      new THREE.Vector3(0, 0, 0)
-      //new THREE.Vector3().copy(firstDomino.getAttribute("position"))
+      new THREE.Vector3(0, 0, 5),
+      new THREE.Vector3().copy(firstDomino.getAttribute("position"))
     );
   }, 3000);
 });
