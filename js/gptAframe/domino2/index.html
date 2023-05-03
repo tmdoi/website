@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    // <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    // <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v1.4.0/dist/aframe-physics-system.js"></script>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <a-scene physics="debug: false; gravity: -9.8">
+      <a-box static-body position="0 -1 0" width="50" height="0.5" depth="50"></a-box>
+
+      <a-entity id="dominoes"></a-entity>
+
+      <a-entity id="timer" text="value: 3; width: 10; align: center; color: #000000" position="0 2 -2"></a-entity>
+
+      <a-camera position="0 1.6 5">
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
