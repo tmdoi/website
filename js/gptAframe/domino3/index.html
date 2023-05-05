@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <a-scene>
+      <a-box
+        position="0 0.25 0" height="0.5"  width="0.25"  depth="0.1"  color="blue"
+      ></a-box>
+
+      <a-box
+        position="0 0.3 1" height="0.1"  width="0.1"  depth="0.5"  color="yellow" 
+        animation="property: position; to: 0 0.45 0; dur: 2000; easing: linear; loop: true"
+      ></a-box>
+
+      <a-entity
+        id="camera"
+        camera
+        position="0 1.6 3"
+        look-controls
+      ></a-entity>
+    </a-scene>
+  </body>
+</html>
