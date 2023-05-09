@@ -12,9 +12,8 @@
     <a-scene physics="debug: false; gravity: -9.8">
       <a-box static-body position="0 -0.25 0" width="50" height="0.5" depth="50"></a-box>
       
-      <a-box static-body
-        position="0 0.3 1" height="0.1"  width="0.1"  depth="0.5"  color="yellow" 
-        animation="property: position; to: 0 0.45 0; dur: 5000; easing: linear; loop: true"
+      <a-box
+       position="0 3 1" height="0.1"  width="0.1"  depth="0.5"  color="yellow" dynamic-body="shape: box; mass: 0.25; friction: 0.5"
       ></a-box>
 
       <a-entity id="dominoes"></a-entity>
