@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", function () {
     const domino = document.createElement("a-box");
     domino.setAttribute("width", "0.25");
     domino.setAttribute("height", "0.5");
-    domino.setAttribute("depth", "0.075");
+    domino.setAttribute("depth", "0.05");
     domino.setAttribute("color", "#FFC107");
     domino.setAttribute("position", `0 0.25 ${-0.2 * (i + 1)}`);
     domino.setAttribute("dynamic-body", "shape: box; mass: 0.25; friction: 0.5");
