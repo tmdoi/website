@@ -31,10 +31,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
   firstDomino.addEventListener("body-loaded", () => {
     setTimeout(() => {
-      firstDomino.components["dynamic-body"].applyImpulse(
-        new THREE.Vector3(0, 0, 5),
-        new THREE.Vector3().copy(firstDomino.getAttribute("position"))
-      );
+      //firstDomino.components["dynamic-body"].applyImpulse(
+      //  new THREE.Vector3(0, 0, 5),
+      //  new THREE.Vector3().copy(firstDomino.getAttribute("position"))
+      //);
     }, 3000);
   });
 });
