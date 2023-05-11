@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   const firstDomino = dominoes.children[0];
   firstDomino.setAttribute("color", "#0000FF"); // 1つ目のドミノを青色に変更
-  firstDomino.setAttribute("rotation", "15 0 0");
+  firstDomino.setAttribute("rotation", "5 0 0");
 
   function countdown(seconds) {
     timer.setAttribute("text", "value", seconds);
