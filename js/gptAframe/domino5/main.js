@@ -31,6 +31,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   firstDomino.addEventListener("body-loaded", () => {
     setTimeout(() => {
+      firstDomino.setAttribute("rotation", "15 0 0");
       //firstDomino.components["dynamic-body"].applyImpulse(
       //  new THREE.Vector3(0, 0, 5),
       //  new THREE.Vector3().copy(firstDomino.getAttribute("position"))
