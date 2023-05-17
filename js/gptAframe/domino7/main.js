@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", function () {
     return {x: posX, y: posY, z: posZ};
   }
 
-  let nextPos = createDominoes(124, 0, 0.25, 0, 3);
+  let nextPos = createDominoes(124, 0, 0.25, 0, 1);
 
   const firstDomino = dominoes.children[0];
   firstDomino.setAttribute("color", "#0000FF");
@@ -73,9 +73,9 @@ window.addEventListener("DOMContentLoaded", function () {
   countdown(3);
   firstDomino.setAttribute("rotation", "25 0 0");
 
-  firstDomino.addEventListener("body-loaded", () => {
-    setTimeout(() => {
-      firstDomino.setAttribute("rotation", "15 0 0");
-    }, 3000);
-  });
+  // firstDomino.addEventListener("body-loaded", () => {
+  //  setTimeout(() => {
+  //    firstDomino.setAttribute("rotation", "15 0 0");
+  //  }, 3000);
+  // });
 });
