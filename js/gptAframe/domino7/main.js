@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", function () {
     return {x: posX, y: posY, z: posZ};
   }
 
-  let nextPos = createDominoes(100, 0, 0.25, 0, 0);
+  let nextPos = createDominoes(100, 0, 0.25, 0, 1);
 
   const firstDomino = dominoes.children[0];
   firstDomino.setAttribute("color", "#0000FF");
