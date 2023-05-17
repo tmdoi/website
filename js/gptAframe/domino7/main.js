@@ -45,7 +45,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   const firstDomino = dominoes.children[0];
   firstDomino.setAttribute("color", "#0000FF");
-  firstDomino.setAttribute("rotation", "25 0 0");
+
 
   function countdown(seconds) {
     timer.setAttribute("text", "value", seconds);
@@ -58,10 +58,11 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   countdown(3);
-
+  firstDomino.setAttribute("rotation", "25 0 0");
+  
   firstDomino.addEventListener("body-loaded", () => {
     setTimeout(() => {
-      firstDomino.setAttribute("rotation", "15 0 0");
+      // firstDomino.setAttribute("rotation", "15 0 0");
     }, 3000);
   });
 });
