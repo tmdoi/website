@@ -21,10 +21,10 @@ window.addEventListener("DOMContentLoaded", function () {
       // Set domino rotation
       switch (dir) {
         case 2: // Negative x-axis
-          domino.setAttribute("rotation", "0 90 0");
+          domino.setAttribute("rotation", "0 0 90");
           break;
         case 3: // Positive x-axis
-          domino.setAttribute("rotation", "0 -90 0");
+          domino.setAttribute("rotation", "0 0 -90");
           break;
         default: // z-axis (default rotation is fine)
           break;
@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   countdown(3);
-  firstDomino.setAttribute("rotation", "25 0 0");
+  firstDomino.setAttribute("rotation", "25 90 0");
 
   // firstDomino.addEventListener("body-loaded", () => {
   //  setTimeout(() => {
