@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function () {
       domino.setAttribute("depth", "0.075");
       domino.setAttribute("color", "#FFC107");
       domino.setAttribute("position", `${posX} ${posY} ${posZ}`);
-      domino.setAttribute("dynamic-body", "shape: box; mass: 0.25; friction: 0.5");
+      domino.setAttribute("dynamic-body", "shape: box; mass: 0.25; friction: 0.8");
       
       // Set domino rotation
       switch (dir) {
