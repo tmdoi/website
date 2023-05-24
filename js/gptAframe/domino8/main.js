@@ -30,7 +30,6 @@ window.addEventListener("DOMContentLoaded", function () {
           break;
       }
       
-      domino.classList.add('clickable');
       dominoes.appendChild(domino);
 
       // Update domino position
