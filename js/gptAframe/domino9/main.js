@@ -29,7 +29,8 @@ window.addEventListener("DOMContentLoaded", function () {
         default: // z-axis (default rotation is fine)
           break;
       }
-
+      
+      domino.classList.add('clickable');
       dominoes.appendChild(domino);
 
       // Update domino position
