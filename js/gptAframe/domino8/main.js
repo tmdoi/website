@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 
   countdown(3);
-  firstDomino.setAttribute("rotation", "25 90 0");
+  // firstDomino.setAttribute("rotation", "25 90 0");
 
   // firstDomino.addEventListener("body-loaded", () => {
   //  setTimeout(() => {
