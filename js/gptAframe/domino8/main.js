@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < num; i++) {
       const domino = document.createElement("a-box");
       domino.setAttribute("width", "0.25");
-      domino.setAttribute("height", "0.499");
+      domino.setAttribute("height", "0.498");
       domino.setAttribute("depth", "0.075");
       domino.setAttribute("color", "#FFC107");
       domino.setAttribute("position", `${posX} ${posY} ${posZ}`);
