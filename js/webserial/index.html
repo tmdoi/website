@@ -1,16 +1,50 @@
-const button = document.querySelector('button');
-button.addEventListener('click', async () => {
-    const port = await navigator.serial.requestPort();
-    await port.open({ baudRate: 9600 });
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Serial Data Receiver</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.serialport.js"></script>
+</head>
+<body>
+    <script>
+        let serial; // シリアルポートオブジェクト
+        let receivedData = ''; // 受信したデータ
 
-    const reader = port.readable.getReader();
-
-    while (true) {
-        const { value, done } = await reader.read();
-        if (done) {
-            reader.releaseLock();
-            break;
+        function setup() {
+            createCanvas(400, 200);
+            serial = new p5.SerialPort();
+            serial.on('list', printList); // 利用可能なポート一覧を表示
+            serial.on('data', parseData); // データ受信時の処理を指定
+            serial.list(); // ポート一覧の取得
         }
-        console.log(value);
-    }
-});
+
+        function printList(portList) {
+            console.log('Available serial ports:');
+            for (let i = 0; i < portList.length; i++) {
+                console.log(i + ' ' + portList[i]);
+            }
+            // 使用するポートのインデックスを指定して、open()を呼び出す
+            let portIndex = 0; // 適切なポートインデックスに変更してください
+            serial.open(portList[portIndex]);
+        }
+
+        function parseData() {
+            receivedData += serial.readStringUntil('\n'); // 改行文字までのデータを取得
+            if (receivedData.length > 0) {
+                console.log(receivedData); // データをコンソールに表示
+                receivedData = ''; // データをクリア
+            }
+        }
+
+        function draw() {
+            background(220);
+            noStroke();
+            textSize(20);
+            textAlign(CENTER);
+            text("Received Data:", width / 2, height / 2);
+            text(receivedData, width / 2, height / 2 + 30);
+        }
+    </script>
+</body>
+</html>
