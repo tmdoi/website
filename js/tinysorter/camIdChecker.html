@@ -9,17 +9,26 @@
 <body>
 
   <script>
-    navigator.mediaDevices.enumerateDevices()
+navigator.mediaDevices.getUserMedia({video: true})
+  .then(stream => {
+    // ユーザーがメディアへのアクセスを許可した後、enumerateDevices()を再度実行します
+    navigator.mediaDevices.enumerate devices()
       .then(devices => {
         devices.forEach(device => {
-          if (device.kind === 'videoinput') {
-            console.log(device.label, device.deviceId);
-          }
+          console.log(device.kind + ": " + device.label +
+                      " id = " + device.deviceId);
         });
       })
       .catch(err => {
-        console.log(err.name, err.message);
+        console.log(err.name + ": " + err.message);
       });
+    
+    // 不要になったストリームを停止します
+    stream.getTracks().forEach(track => track.stop());
+  })
+  .catch(err => {
+    console.log(err.name + ": " + err.message);
+  });
   </script>
 
 </body>
