@@ -12,7 +12,7 @@
 navigator.mediaDevices.getUserMedia({video: true})
   .then(stream => {
     // ユーザーがメディアへのアクセスを許可した後、enumerateDevices()を再度実行します
-    navigator.mediaDevices.enumerate devices()
+    navigator.mediaDevices.enumerateDevices()
       .then(devices => {
         devices.forEach(device => {
           console.log(device.kind + ": " + device.label +
