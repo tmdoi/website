@@ -396,9 +396,17 @@ function myInputEvent() {
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+  let constraints = {
+    video: {
+      deviceId: { exact: 30ae5d8921433bcd8ea10e25ee8ca850ed43d2906c94f06b7636f9da3f207fed }  // cameraIdは上記で取得したID 30ae5d8921433bcd8ea10e25ee8ca850ed43d2906c94f06b7636f9da3f207fed
+    }
+  };
+  // video = createCapture(constraints);
+  // cameraId 30ae5d8921433bcd8ea10e25ee8ca850ed43d2906c94f06b7636f9da3f207fed
+
   // Create the video
   videoSize = 250;
-  video = createCapture(VIDEO);
+  video = createCapture(constraints);
   video.hide();
 
   cameraBorder = loadImage('camera_border.png');
