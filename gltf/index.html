@@ -1,1 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A-Frame GLTF Model Display</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- A-Frameライブラリのインクルード -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-assets>
+      <!-- ここでGLTFモデルのパスを指定 -->
+      <a-asset-item id="myModel" src="path/to/mycityEmb.gltf"></a-asset-item>
+    </a-assets>
+
+    <!-- アセットを使用してモデルをシーンに追加 -->
+    <!-- 位置、回転、スケールを調整して適切に表示 -->
+    <a-entity gltf-model="#myModel" position="0 0 0" rotation="0 0 0" scale="1 1 1"></a-entity>
+
+    <!-- シンプルな照明とカメラの設定 -->
+    <a-light type="ambient" color="#445"></a-light>
+    <a-light type="directional" color="#fff" intensity="0.5" position="-1 1 1"></a-light>
+    <a-camera position="0 0 5"></a-camera>
+  </a-scene>
+</body>
+</html>
 
