@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>リアルタイム画像分類</title>
+</head>
+<body>
+    <h1>Teachable Machine リアルタイム画像分類</h1>
+    <video autoplay playsinline muted id="webcam" width="640" height="480"></video>
+    <h2>分類結果:</h2>
+    <div id="prediction"></div>
+
+    <!-- TensorFlow.jsの読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="app.js"></script>
+</body>
+</html>
