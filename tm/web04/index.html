@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Web Serial API Example</title>
+</head>
+<body>
+    <button id="connect">Connect to micro:bit</button>
+    <input type="text" id="inputText" placeholder="Enter text to send">
+    <button id="send">Send</button>
+
+    <script>
+        let port;
+        let writer;
+
+        document.getElementById("connect").addEventListener("click", async () => {
+            port = await navigator.serial.requestPort();
+            await port.open({ baudRate: 115200 });
+
+            const encoder = new TextEncoderStream();
+            writer = encoder.writable.getWriter();
+            encoder.readable.pipeTo(port.writable);
+        });
+
+        document.getElementById("send").addEventListener("click", async () => {
+            const inputText = document.getElementById("inputText").value;
+            await writer.write(inputText + "\n");
+        });
+    </script>
+</body>
+</html>
