@@ -67,8 +67,10 @@
 
                     if (result.scores[i] > 0.85) {
                         if (classLabels[i] === "no") {
+                            await writer.write("No!" + "\n");
                             countNo++;
                         } else if (classLabels[i] === "yes") {
+                            await writer.write("Yes!" + "\n");
                             countYes++;
                         }
                     }
