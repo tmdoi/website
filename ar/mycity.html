@@ -14,13 +14,12 @@
 
       <!-- マーカー定義 -->
       <a-marker type="pattern" url="ARjs.patt"> 
-          <!-- ② -->
-          <!-- マーカーの位置に下記の立方体が表示される -->
-          <a-box
-              position="0 0.5 0"
-              rotation="0 0 0"
-              scale="1 1 1"
-              color="red"></a-box>
+        <!-- glTFファイルを読み込むように変更 -->
+        <a-entity
+          position="0 0 0"
+          rotation="0 0 0"
+          scale="0.001 0.001 0.001"
+          gltf-model="tokyoStation0509.glb"></a-entity>
       </a-marker>
     </a-scene>
   </body>
