@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Teachable Machine and Micro:bit UART Communication</title>
+  <style type="text/css">
+    * {
+        font-size: 3vmin;
+        padding: 3vmin;
+    }
+    body {
+        text-align: center;
+    }
+    textarea {
+        vertical-align: middle;
+    }
+    .label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teachable Machine Audio Model</h1>
+  <button type="button" onclick="initTeachableMachine()">Start</button>
+  <div id="label-container"></div>
+  <div id="yes-label" class="label" style="background-color: gray;">Y: 0</div>
+  <div id="label-A" class="label" style="background-color: grey;">A</div>
+  <div id="no-label" class="label" style="background-color: gray;">N: 0</div>
+  <div id="label-B" class="label" style="background-color: grey;">B</div>
+
+  <h1>Micro:bit UART 通信</h1>
+  <form>
+    <div>
+      <button type="button" id="connect">接続</button>
+      受信内容<textarea id="recieve_text"></textarea>
+    </div>
+    <div>
+      送信内容
+      <input type="text" id="send_text" value="test">
+      <button type="button" id="send" disabled>送信</button>
+    </div>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.0/dist/speech-commands.min.js"></script>
+  
+  <script type="text/javascript">
+    // Teachable Machine part
+    const URL = "https://teachablemachine.withgoogle.com/models/_hm56gqV1/";
+    let yesCount = 0;
+    let noCount = 0;
+
+    async function createModel() {
+        const checkpointURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+        
+        const recognizer = speechCommands.create(
+            "BROWSER_FFT",
+            undefined,
+            checkpointURL,
+            metadataURL);
+        
+        await recognizer.ensureModelLoaded();
+        return recognizer;
+    }
+    
+    async function initTeachableMachine() {
+        const recognizer = await createModel();
+        const classLabels = recognizer.wordLabels();
+        const labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < classLabels.length; i++) {
+            labelContainer.appendChild(document.createElement("div"));
+        }
+        
+        recognizer.listen(result => {
+            const scores = result.scores;
+            for (let i = 0; i < classLabels.length; i++) {
+                const classPrediction = classLabels[i] + ": " + result.scores[i].toFixed(2);
+                labelContainer.childNodes[i].innerHTML = classPrediction;
+            }
+
+            // Check for "yes" or "no" and send to Micro:bit if threshold is met
+            if (scores[classLabels.indexOf('yes')] > 0.85) {
+                yesCount++;
+                updateYesNoLabels('yes');
+                sendToMicrobit('y');
+            } else if (scores[classLabels.indexOf('no')] > 0.85) {
+                noCount++;
+                updateYesNoLabels('no');
+                sendToMicrobit('n');
+            }
+        }, {
+            includeSpectrogram: true,
+            probabilityThreshold: 0.75,
+            invokeCallbackOnNoiseAndUnknown: true,
+            overlapFactor: 0.50
+        });
+    }
+
+    function updateYesNoLabels(result) {
+        const yesLabel = document.getElementById('yes-label');
+        const noLabel = document.getElementById('no-label');
+        if (result === 'yes') {
+            yesLabel.style.color = 'white';
+            yesLabel.style.backgroundColor = 'red';
+            noLabel.style.color = 'black';
+            noLabel.style.backgroundColor = 'gray';
+            yesLabel.innerHTML = `Y: ${yesCount}`;
+        } else if (result === 'no') {
+            yesLabel.style.color = 'black';
+            yesLabel.style.backgroundColor = 'gray';
+            noLabel.style.color = 'white';
+            noLabel.style.backgroundColor = 'blue';
+            noLabel.innerHTML = `N: ${noCount}`;
+        }
+    }
+
+    function sendToMicrobit(message) {
+        if (rx) {
+            rx.writeValue(new TextEncoder().encode(message + '\n'));
+        }
+    }
+
+    // Micro:bit UART part
+    const UUID_UART_SERVICE = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+    const UUID_TX_CHAR_CHARACTERISTIC = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+    const UUID_RX_CHAR_CHARACTERISTIC = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+
+    let gatt = null;
+    let tx = null;
+    let rx = null;
+
+    const update = connected => {
+        document.getElementById('connect').textContent = connected ? '切断' : '接続';
+        document.getElementById('send').disabled = !connected;
+    };
+
+    const send = text => rx.writeValue(new TextEncoder().encode(text + '\n'));
+
+    const updateLabels = (char) => {
+        const labelA = document.getElementById('label-A');
+        const labelB = document.getElementById('label-B');
+        if (char === 'a') {
+            labelA.style.backgroundColor = 'red';
+            labelB.style.backgroundColor = 'grey';
+        } else if (char === 'b') {
+            labelA.style.backgroundColor = 'grey';
+            labelB.style.backgroundColor = 'blue';
+        }
+    };
+
+    document.getElementById('connect').addEventListener('click', e => {
+        if(!(navigator.bluetooth && navigator.bluetooth.requestDevice)) {
+            alert('WebBluetooth に未対応のブラウザです。');
+            return;
+        }
+        if (document.getElementById('connect').textContent == '接続') {
+            navigator.bluetooth.requestDevice({
+                filters: [
+                    { services: [UUID_UART_SERVICE] },
+                    { namePrefix: 'BBC micro:bit' }
+                ]
+            }).then(device => {
+                gatt = device.gatt;
+                return gatt.connect();
+            }).then(server =>
+                server.getPrimaryService(UUID_UART_SERVICE)
+            ).then(service =>
+                Promise.all([
+                    service.getCharacteristic(UUID_TX_CHAR_CHARACTERISTIC),
+                    service.getCharacteristic(UUID_RX_CHAR_CHARACTERISTIC)
+                ])
+            ).then(characteristics => {
+                tx = characteristics[0];
+                tx.startNotifications();
+                tx.addEventListener('characteristicvaluechanged', e => {
+                    const text = new TextDecoder().decode(e.target.value).trim();
+                    document.getElementById('recieve_text').value = text; // Display only the received data
+                    updateLabels(text); // Update label colors based on received character
+                });
+                rx = characteristics[1];
+                update(true);
+            }).catch(function(err) {
+                alert(err);
+            });
+        } else {
+            gatt.disconnect();
+            update(false);
+        }
+    });
+
+    document.getElementById('send').addEventListener('click', e => {
+        send(document.getElementById('send_text').value);
+    });
+  </script>
+</body>
+</html>
