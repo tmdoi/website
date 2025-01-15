@@ -1,0 +1,54 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>寝屋川キャンパス</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #countdown {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>寝屋川キャンパスに来てください</h1>
+    <p>移転までの残り時間：</p>
+    <div id="countdown"></div>
+
+    <script>
+        // 日本時間での指定日時（例: 2025年1月31日 23:59:59 JST）
+        const targetDate = new Date("2027-04-01T00:00:00+09:00");
+
+        function updateCountdown() {
+            const now = new Date(); // 現在の日時（ローカルタイム、通常は日本時間）
+            const timeDifference = targetDate - now;
+
+            if (timeDifference < 0) {
+                document.getElementById("countdown").innerText = "カウントダウンが終了しました！";
+                clearInterval(interval);
+                return;
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerText = 
+                `${days}日 ${hours}時間 ${minutes}分 ${seconds}秒`;
+        }
+
+        // 初期化
+        updateCountdown();
+
+        // 1秒ごとに更新
+        const interval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
